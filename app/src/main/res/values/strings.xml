@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Authorization</string>
+    <string name="logo">poifox</string>
+    <string name="preamble">Find the best place in town</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="or">or</string>
+
+</resources>
