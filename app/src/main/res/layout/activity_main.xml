@@ -72,9 +72,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="16dp"
         >
 
         <TextView
+            android:id="@+id/vTvLogIn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/log_in"
@@ -95,6 +97,7 @@
         </TextView>
 
         <TextView
+            android:id="@+id/vTvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
@@ -172,12 +175,17 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_margin="16dp"
+        android:id="@+id/vLlRepeatPass"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/grey"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:visibility="gone"
+   >
 
 
         <ImageView
@@ -208,13 +216,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp">
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:text="@string/remember_data"
             android:textColor="@color/hint"
+            android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:textSize="16sp"
             android:fontFamily="@font/remember_data_font"
@@ -228,6 +238,7 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+id/vIvKeepLogIn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/wrong">
@@ -243,19 +254,21 @@
 
 
     <FrameLayout
+        android:id="@+id/vFlLogIn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="42dp"
-        android:background="@color/grey">
+        android:background="@color/grey"
+        android:visibility="visible"
+        android:clickable="true">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/sign_in_button_selector"
             android:layout_margin="1.4dp"
-            android:clickable="true"
             >
 
             <ImageView
@@ -268,10 +281,41 @@
         </FrameLayout>
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/vFlSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="42dp"
+        android:background="@color/grey"
+        android:visibility="gone"
+        android:clickable="true"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_in_button_selector"
+            android:layout_margin="1.4dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="@string/sign_up"
+                android:layout_gravity="center"
+                android:textColor="@color/white"
+                android:textSize="16sp">
+
+            </TextView>
+        </FrameLayout>
+    </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="24dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="32dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
