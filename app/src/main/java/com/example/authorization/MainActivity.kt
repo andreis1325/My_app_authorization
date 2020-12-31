@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
     private fun showLogo(){
         val spannableString = SpannableString(getString(R.string.logo))
         val foregroundSpan1 = ForegroundColorSpan(Color.WHITE)
-        val foregroundSpan2 = ForegroundColorSpan(resources.getColor(R.color.logo_text))
+        val foregroundSpan2 = ForegroundColorSpan(resources.getColor(R.color.orange))
         spannableString.setSpan(foregroundSpan1, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableString.setSpan(foregroundSpan2, 3, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         vTvLogo.setText(spannableString)

@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/log_in"
-            android:textColor="@color/white"
+            android:textColor="@color/orange"
             >
 
         </TextView>
@@ -105,7 +105,208 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+
+            <ImageView
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:background="@drawable/email"
+                android:layout_marginLeft="8dp">
+
+
+            </ImageView>
+
+        <EditText
+            android:id="@+id/editTextTextEmailAddress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:textSize="16sp"
+            android:hint="@string/email"
+            android:textColorHint="@color/hint"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:background="@drawable/password"
+            android:layout_marginLeft="8dp">
+
+
+        </ImageView>
+
+        <EditText
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:textSize="16sp"
+            android:hint="@string/password"
+
+
+            android:textColorHint="@color/hint"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+
+        <ImageView
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:background="@drawable/password"
+            android:layout_marginLeft="8dp">
+
+
+        </ImageView>
+
+        <EditText
+
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:textSize="16sp"
+            android:hint="@string/repeat_password"
+
+
+            android:textColorHint="@color/hint"
+            android:backgroundTint="@android:color/transparent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/remember_data"
+            android:textColor="@color/hint"
+            android:layout_marginLeft="32dp"
+            android:textSize="16sp"
+            android:fontFamily="@font/remember_data_font"
+            android:gravity="center_vertical">
+
+        </TextView>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/wrong">
+
+
+            </ImageView>
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="42dp"
+        android:background="@color/grey">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/sign_in_button_selector"
+            android:layout_margin="1.4dp"
+            android:clickable="true"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/key"
+                android:layout_gravity="center">
+
+            </ImageView>
+        </FrameLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:text="@string/forgot_password"
+            android:textSize="14sp"
+            android:textColor="@color/hint"
+            android:gravity="right"
+            android:layout_marginRight="8dp">
+
+
+        </TextView>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:text="@string/recover_password"
+            android:textSize="14sp"
+            android:textColor="@color/white">
+
+
+        </TextView>
+
+    </LinearLayout>
+
+
 </LinearLayout>
+
+
 
 
 
