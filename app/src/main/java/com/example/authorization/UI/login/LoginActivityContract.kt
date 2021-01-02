@@ -9,7 +9,8 @@ public interface LoginActivityContract{
     }
 
     interface Presenter{
-        fun doLogin(email: String, password : String)
+        fun doLogIn(email: String, password : String)
+        fun doSignUp(email: String, pass1: String, pass2: String)
 
     }
 

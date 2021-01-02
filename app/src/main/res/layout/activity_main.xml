@@ -160,7 +160,7 @@
         </ImageView>
 
         <EditText
-            android:id="@+id/vEtPassword"
+            android:id="@+id/vEtPass1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -198,7 +198,7 @@
         </ImageView>
 
         <EditText
-
+            android:id="@+id/vEtPass2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"

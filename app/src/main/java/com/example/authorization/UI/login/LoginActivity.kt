@@ -30,15 +30,27 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View{
 
 
     private fun initOnClickListeners(){
+        vFlSignUp.setOnClickListener(){
+            var email = vEtEmail.text.toString()
+            var pass1 = vEtPass1.text.toString()
+            var pass2 = vEtPass2.text.toString()
+
+            if(email == "" || pass1 == "" || pass2 == "") {
+                onError("Empty email or password field")
+            }else{
+                presenter.doSignUp(email, pass1, pass2)
+            }
+
+        }
 
         vFlLogIn.setOnClickListener(){
             var email = vEtEmail.text.toString()
-            var password = vEtPassword.text.toString()
+            var password = vEtPass1.text.toString()
 
             if(email == "" || password == "") {
                 onError("Empty email or password field")
             }else{
-                presenter.doLogin(email, password)
+                presenter.doLogIn(email, password)
             }
 
         }
