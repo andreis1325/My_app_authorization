@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".UI.login.LoginActivity"
     android:background="@color/bg"
     android:orientation="vertical"
     android:padding="16dp"
@@ -128,7 +128,7 @@
             </ImageView>
 
         <EditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/vEtEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -160,7 +160,7 @@
         </ImageView>
 
         <EditText
-
+            android:id="@+id/vEtPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
@@ -335,6 +335,7 @@
 
         </TextView>
         <TextView
+            android:id="@+id/vTvRecoverPass"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
