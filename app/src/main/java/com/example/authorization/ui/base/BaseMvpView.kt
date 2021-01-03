@@ -1,4 +1,4 @@
-package com.delivery.ui.base
+package com.example.authorization.ui.base
 
 import com.arellomobile.mvp.MvpView
 

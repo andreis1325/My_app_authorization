@@ -1,8 +1,6 @@
-package com.example.authorization.UI.login
+package com.example.authorization.ui.login
 
-import android.content.Context
-import com.delivery.ui.base.BaseMvpPresenter
-import com.delivery.ui.base.BaseMvpView
+import com.example.authorization.ui.base.BaseMvpView
 
 
 public interface LoginView : BaseMvpView {

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Authorization">
         <activity android:name=".RecoverPassword"></activity>
-        <activity android:name=".UI.login.LoginActivity">
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

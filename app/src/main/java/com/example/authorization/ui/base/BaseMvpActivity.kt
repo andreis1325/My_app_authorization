@@ -1,4 +1,4 @@
-package com.delivery.ui.base
+package com.example.authorization.ui.base
 
 
 import android.content.Context
@@ -10,8 +10,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-
-
 
 
 abstract class BaseMvpActivity : MvpActivity(),

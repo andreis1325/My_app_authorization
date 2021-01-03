@@ -1,10 +1,7 @@
-package com.example.authorization.UI.login
+package com.example.authorization.ui.login
 
 import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
-import com.arellomobile.mvp.MvpView
-import com.delivery.ui.base.BaseMvpPresenter
-import com.delivery.ui.base.BaseMvpView
+import com.example.authorization.ui.base.BaseMvpPresenter
 
 
 // BaseMvpPresenter<LoginView>()
