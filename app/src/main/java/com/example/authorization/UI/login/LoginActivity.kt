@@ -8,80 +8,77 @@ import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import com.delivery.ui.base.BaseMvpActivity
 import com.example.authorization.R
 import com.example.authorization.RecoverPassword
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class LoginActivity : AppCompatActivity(), LoginActivityContract.View{
+class LoginActivity :  BaseMvpActivity(), LoginView {
 
-    lateinit var presenter : LoginActivityContract.Presenter
+    lateinit var viewState : LoginPresenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun getLayoutId(): Int = R.layout.activity_main
 
-        presenter = LoginActivityPresenter(this)
+    override fun onCreateActivity(savedInstanceState: Bundle?) {
 
         showLogo()
+        initVariables()
         initOnClickListeners()
     }
 
+    private fun initVariables(){
+        viewState = LoginPresenter()
+    }
+
+    fun onvFlSignUpClicked(){
+        var email = vEtEmail.text.toString()
+        var pass1 = vEtPass1.text.toString()
+        var pass2 = vEtPass2.text.toString()
+
+        viewState.doSignUp(email, pass1, pass2)
+
+    }
+
+    fun onvFlLogInKclicked(){
+        var email = vEtEmail.text.toString()
+        var password = vEtPass1.text.toString()
+
+        viewState.doLogIn(email, password)
+    }
+
+
+
+    fun onvIvKeepLogInClicked(){
+        if (vIvKeepLogIn.background.constantState?.equals(resources.getDrawable(R.drawable.right).constantState)!!)
+            vIvKeepLogIn.setBackgroundResource(R.drawable.wrong)
+        else vIvKeepLogIn.setBackgroundResource(R.drawable.right)
+    }
+
+    fun onvTvRecoverPassClicked(){
+        var intent = Intent(this, RecoverPassword::class.java)
+        startActivity(intent)
+    }
 
     private fun initOnClickListeners(){
-        vFlSignUp.setOnClickListener(){
-            var email = vEtEmail.text.toString()
-            var pass1 = vEtPass1.text.toString()
-            var pass2 = vEtPass2.text.toString()
-
-            if(email == "" || pass1 == "" || pass2 == "") {
-                onError("Empty email or password field")
-            }else{
-                presenter.doSignUp(email, pass1, pass2)
-            }
-
+        vFlSignUp.setOnClickListener() {
+            onvFlSignUpClicked()
         }
-
         vFlLogIn.setOnClickListener(){
-            var email = vEtEmail.text.toString()
-            var password = vEtPass1.text.toString()
-
-            if(email == "" || password == "") {
-                onError("Empty email or password field")
-            }else{
-                presenter.doLogIn(email, password)
-            }
-
+            onvFlLogInKclicked()
         }
-
         vTvLogIn.setOnClickListener(){
-            vTvLogIn.setTextColor(resources.getColor(R.color.orange))
-            vTvSignUp.setTextColor(resources.getColor(R.color.white))
-            vLlRepeatPass.visibility = View.GONE
-            vFlLogIn.visibility = View.VISIBLE
-            vFlSignUp.visibility = View.GONE
+            viewState.onvTvLogInClicked()
         }
-
         vTvSignUp.setOnClickListener(){
-            vTvLogIn.setTextColor(resources.getColor(R.color.white))
-            vTvSignUp.setTextColor(resources.getColor(R.color.orange))
-            vLlRepeatPass.visibility = View.VISIBLE
-            vFlLogIn.visibility = View.GONE
-            vFlSignUp.visibility = View.VISIBLE
+            viewState.onvTvSignUpClicked()
         }
-
         vIvKeepLogIn.setOnClickListener(){
-            if (vIvKeepLogIn.background.constantState?.equals(resources.getDrawable(R.drawable.right).constantState)!!)
-            vIvKeepLogIn.setBackgroundResource(R.drawable.wrong)
-            else vIvKeepLogIn.setBackgroundResource(R.drawable.right)
+            onvIvKeepLogInClicked()
         }
-
         vTvRecoverPass.setOnClickListener(){
-            var intent = Intent(this, RecoverPassword::class.java)
-            startActivity(intent)
+            onvTvRecoverPassClicked()
         }
-
     }
 
     private fun showLogo(){
@@ -93,6 +90,8 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View{
         vTvLogo.setText(spannableString)
     }
 
+
+    //   MARK:  View Implementation
     override fun onSuccess(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -100,5 +99,22 @@ class LoginActivity : AppCompatActivity(), LoginActivityContract.View{
     override fun onError(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
+
+    override fun goToLogInForm(){
+        vTvLogIn.setTextColor(resources.getColor(R.color.orange))
+        vTvSignUp.setTextColor(resources.getColor(R.color.white))
+        vLlRepeatPass.visibility = View.GONE
+        vFlLogIn.visibility = View.VISIBLE
+        vFlSignUp.visibility = View.GONE
+    }
+
+    override fun goToSignUpForm(){
+        vTvLogIn.setTextColor(resources.getColor(R.color.white))
+        vTvSignUp.setTextColor(resources.getColor(R.color.orange))
+        vLlRepeatPass.visibility = View.VISIBLE
+        vFlLogIn.visibility = View.GONE
+        vFlSignUp.visibility = View.VISIBLE
+    }
+
 
 }
