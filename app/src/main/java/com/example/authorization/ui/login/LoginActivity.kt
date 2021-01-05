@@ -11,6 +11,7 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
+import com.example.authorization.Account
 import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.R
 import com.example.authorization.RecoverPassword
@@ -117,6 +118,10 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
 
     override fun recoverPassword(){
         startActivity(Intent(this, RecoverPassword::class.java))
+    }
+
+    override fun showAccount() {
+        startActivity(Intent(this, Account::class.java))
     }
 }
 

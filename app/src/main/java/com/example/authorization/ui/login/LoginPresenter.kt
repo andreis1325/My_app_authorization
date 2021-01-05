@@ -2,10 +2,13 @@ package com.example.authorization.ui.login
 
 import com.arellomobile.mvp.InjectViewState
 import com.example.authorization.R
+import com.example.authorization.repo.UserRepo
 import com.example.authorization.ui.base.BaseMvpPresenter
 
 @InjectViewState
 class LoginPresenter() : BaseMvpPresenter<LoginView>() {
+
+    private val userRepo = UserRepo()
 
     companion object {
         private const val TEST_EMAIL = "test@mail.ru"
@@ -24,10 +27,12 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if (email == TEST_EMAIL && password == PASSWORD)
-            viewState.onSuccess(R.string.wrong_email)
-        else
+        if(userRepo.isRegistered(email, password)){
+            viewState.showAccount()
+            viewState.onSuccess(R.string.successful)
+        } else
             viewState.onError(R.string.wrong_data)
+
     }
 
     fun doSignUp(email: String, pass1: String, pass2: String) {
@@ -42,10 +47,19 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if (pass1 != pass2)
+        if (pass1 != pass2){
             viewState.onError(R.string.not_equal_passwords)
-        else
+            return
+        }
+
+        if(userRepo.isRegistered(email, pass1)){
+            viewState.onError(R.string.wrong_email)
+            return
+        }
+
+            userRepo.addUser(email, pass1)
             viewState.onSuccess(R.string.successful)
+
     }
 
     fun onvTvLogInClicked() {
@@ -72,7 +86,7 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         viewState.recoverPassword()
     }
 
-    /* MARK: Assistant methods */
+    /* MARK : Assistant methods */
     private fun isEmail(string: String): Boolean{
         val matchResult = Regex(""".+@.+\..+""").find(string)
         return matchResult != null

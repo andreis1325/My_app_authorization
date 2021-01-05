@@ -12,6 +12,7 @@ interface LoginView : BaseMvpView {
         fun goToAccount()
         fun createAccount()
         fun recoverPassword()
+        fun showAccount()
         fun onSuccess(message: Int)
         fun onError(message: String)
         fun onError(@StringRes message: Int)
