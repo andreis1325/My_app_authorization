@@ -1,355 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginActivity"
-    android:background="@color/bg"
-    android:orientation="vertical"
-    android:padding="16dp"
-    >
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fillViewport="true"
+    android:background="@color/bg">
 
-    <FrameLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
+        android:background="@color/bg"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_16">
+
 
         <ImageView
             android:id="@+id/vIvLogo"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/fox" />
-    </FrameLayout>
+            android:layout_gravity="center" />
 
 
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp">
+            <TextView
+                android:id="@+id/vTvLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dp_16"
+                android:fontFamily="@font/font_logo"
+                android:text="@string/logo"
+                android:textColor="@color/white"
+                android:textSize="42sp"
+                android:textStyle="bold"/>
+
 
         <TextView
-            android:id="@+id/vTvLogo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/logo"
-            android:fontFamily="@font/font_logo"
-            android:textStyle="bold"
-            android:textSize="42sp"
-            android:textColor="@color/white">
-
-
-        </TextView>
-
-
-    </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/preamble"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        android:fontFamily="@font/preamble_font">
-
-
-    </TextView>
-
-    <View
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grey">
-
-    </View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        >
-
-        <TextView
-            android:id="@+id/vTvLogIn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/log_in"
-            android:textColor="@color/orange"
-            >
-
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or"
+            android:fontFamily="@font/preamble_font"
+            android:text="@string/preamble"
             android:textColor="@color/white"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            >
+            android:textSize="13sp">
+
 
         </TextView>
 
-        <TextView
-            android:id="@+id/vTvSignUp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:textColor="@color/white"
-            >
-
-        </TextView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_margin="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:orientation="horizontal"
-        android:gravity="center"
-        >
-
-
-            <ImageView
-                android:layout_height="30dp"
-                android:layout_width="30dp"
-                android:background="@drawable/email"
-                android:layout_marginLeft="8dp">
-
-
-            </ImageView>
-
-        <EditText
-            android:id="@+id/vEtEmail"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            android:textSize="16sp"
-            android:hint="@string/email"
-            android:textColorHint="@color/hint"
-            android:backgroundTint="@android:color/transparent"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:orientation="horizontal"
-        android:gravity="center">
-
-
-        <ImageView
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:background="@drawable/password"
-            android:layout_marginLeft="8dp">
-
-
-        </ImageView>
-
-        <EditText
-            android:id="@+id/vEtPass1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            android:textSize="16sp"
-            android:hint="@string/password"
-
-
-            android:textColorHint="@color/hint"
-            android:backgroundTint="@android:color/transparent"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vLlRepeatPass"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:visibility="gone"
-   >
-
-
-        <ImageView
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:background="@drawable/password"
-            android:layout_marginLeft="8dp">
-
-
-        </ImageView>
-
-        <EditText
-            android:id="@+id/vEtPass2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:layout_weight="1"
-            android:layout_margin="4dp"
-            android:textSize="16sp"
-            android:hint="@string/repeat_password"
-
-
-            android:textColorHint="@color/hint"
-            android:backgroundTint="@android:color/transparent"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="@string/remember_data"
-            android:textColor="@color/hint"
-            android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:textSize="16sp"
-            android:fontFamily="@font/remember_data_font"
-            android:gravity="center_vertical">
-
-        </TextView>
-
-        <FrameLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/vIvKeepLogIn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/wrong">
-
-
-            </ImageView>
-        </FrameLayout>
-
-
-
-
-    </LinearLayout>
-
-
-    <FrameLayout
-        android:id="@+id/vFlLogIn"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="42dp"
-        android:background="@color/grey"
-        android:visibility="visible"
-        android:clickable="true">
-
-        <FrameLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/sign_in_button_selector"
-            android:layout_margin="1.4dp"
-            >
+            android:layout_height="1dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/grey">
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:background="@drawable/key"
-                android:layout_gravity="center">
+        </View>
 
-            </ImageView>
-        </FrameLayout>
-    </FrameLayout>
 
-    <FrameLayout
-        android:id="@+id/vFlSignUp"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="42dp"
-        android:background="@color/grey"
-        android:visibility="gone"
-        android:clickable="true"
-        >
-
-        <FrameLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/sign_in_button_selector"
-            android:layout_margin="1.4dp"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/vTvLogIn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/log_in"
+                android:textColor="@color/orange">
+
+            </TextView>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:text="@string/or"
+                android:textColor="@color/white">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/vTvSignUp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/sign_up"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/white">
+
+            </TextView>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/email">
+
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/vEtEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/sp_16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/password">
+
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/vEtPass1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+
+
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vLlRepeatPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/grey"
+            android:gravity="center"
+            android:orientation="horizontal"
+            tools:visibility="visible"
+            android:visibility="gone">
+
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:background="@drawable/password">
+
+
+            </ImageView>
+
+            <EditText
+                android:id="@+id/vEtPass2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
+                android:hint="@string/repeat_password"
+                android:inputType="textPassword"
+
+
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_weight="3"
+                android:fontFamily="@font/remember_data_font"
+                android:gravity="center_vertical"
+                android:text="@string/remember_data"
+                android:textColor="@color/hint"
                 android:textSize="16sp">
 
             </TextView>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/vIvKeepLogIn"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/wrong">
+
+
+                </ImageView>
+            </FrameLayout>
+
+
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/vFlLogIn"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/grey"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="visible">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1dp"
+                android:background="@drawable/sign_in_button_selector">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/key">
+
+                </ImageView>
+            </FrameLayout>
         </FrameLayout>
-    </FrameLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="8dp"
-        android:orientation="horizontal"
-        android:gravity="center">
+        <FrameLayout
+            android:id="@+id/vFlSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="42dp"
+            android:layout_marginRight="16dp"
+            android:background="@color/grey"
+            android:clickable="true"
+            android:focusable="true"
+            android:visibility="gone">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:text="@string/forgot_password"
-            android:textSize="14sp"
-            android:textColor="@color/hint"
-            android:gravity="right"
-            android:layout_marginRight="8dp">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="1.4dp"
+                android:background="@drawable/sign_in_button_selector">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:text="@string/sign_up"
+                    android:textColor="@color/white"
+                    android:textSize="16sp">
+
+                </TextView>
+            </FrameLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_weight="4"
+                android:gravity="end"
+                android:text="@string/forgot_password"
+                android:textColor="@color/hint"
+                android:textSize="14sp">
 
 
-        </TextView>
-        <TextView
-            android:id="@+id/vTvRecoverPass"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="3"
-            android:text="@string/recover_password"
-            android:textSize="14sp"
-            android:textColor="@color/white">
+            </TextView>
+
+            <TextView
+                android:id="@+id/vTvRecoverPass"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:text="@string/recover_password"
+                android:textColor="@color/white"
+                android:textSize="14sp">
 
 
-        </TextView>
+            </TextView>
+
+        </LinearLayout>
 
     </LinearLayout>
 
+</ScrollView>
 
-</LinearLayout>
 
 
 

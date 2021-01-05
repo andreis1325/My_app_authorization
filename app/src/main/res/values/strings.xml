@@ -11,6 +11,11 @@
     <string name="remember_data">Keep me logged in</string>
     <string name="forgot_password">Forgot password ?</string>
     <string name="recover_password">Recover here.</string>
+    <string name="empty_field">Empty email or password field</string>
+    <string name="wrong_email">Wrong email</string>
+    <string name="successful">Successful</string>
+    <string name="wrong_data">Wrong email or password</string>
+    <string name="not_equal_passwords">Passwords aren\'t equal</string>
 
 
 </resources>
