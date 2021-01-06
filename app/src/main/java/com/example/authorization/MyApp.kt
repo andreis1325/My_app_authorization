@@ -13,6 +13,7 @@ class MyApp: Application() {
 
     private fun initRealm(){
         Realm.init(this@MyApp)
+
         val realmConfiguration = RealmConfiguration.Builder()
             .rxFactory(RealmObservableFactory(false))
             .deleteRealmIfMigrationNeeded()

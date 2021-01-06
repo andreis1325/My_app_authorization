@@ -118,8 +118,8 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
     }
 
     override fun goToAccount() {
-        finish()
         startActivity(Intent(this, Account::class.java))
+        finish()
     }
 }
 

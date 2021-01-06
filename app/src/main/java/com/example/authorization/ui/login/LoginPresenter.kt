@@ -11,11 +11,6 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
 
     private val userRepo = UserRepo()
 
-    companion object {
-        private const val TEST_EMAIL = "test@mail.ru"
-        private const val PASSWORD = "test"
-    }
-
     fun doLogIn(email: String, password: String) {
 
         if (email.isEmpty() || password.isEmpty()) {
@@ -86,6 +81,4 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
     fun onRecoverPassClicked(){
         viewState.recoverPassword()
     }
-
-    /* MARK : Assistant methods */
 }
