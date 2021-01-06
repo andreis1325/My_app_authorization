@@ -1,6 +1,7 @@
 package com.example.authorization.utils.extensions
 
 import android.view.View
+import android.widget.EditText
 import io.realm.Realm
 
 fun View.visible() {
@@ -19,4 +20,8 @@ fun Realm.execute(block: (realm: Realm) -> Unit) {
             block(realm)
         }
     }
+}
+
+internal fun String.isEmailValid(): Boolean {
+    return android.util.Patterns.EMAIL_ADDRESS.matcher(this).matches()
 }

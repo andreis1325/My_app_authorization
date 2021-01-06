@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState
 import com.example.authorization.R
 import com.example.authorization.repo.UserRepo
 import com.example.authorization.ui.base.BaseMvpPresenter
+import com.example.authorization.utils.extensions.isEmailValid
 
 @InjectViewState
 class LoginPresenter() : BaseMvpPresenter<LoginView>() {
@@ -18,77 +19,73 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
     fun doLogIn(email: String, password: String) {
 
         if (email.isEmpty() || password.isEmpty()) {
-            viewState.onError(R.string.empty_field)
+            viewState.showMsg(R.string.empty_field)
             return
         }
 
-        if (!isEmail(email)) {
-            viewState.onError(R.string.wrong_email)
+        if (!email.isEmailValid()) {
+            viewState.showMsg(R.string.wrong_email)
             return
         }
 
         if(userRepo.isRegistered(email, password)){
-            viewState.showAccount()
-            viewState.onSuccess(R.string.successful)
+            viewState.goToAccount()
+            viewState.showMsg(R.string.successful)
         } else
-            viewState.onError(R.string.wrong_data)
+            viewState.showMsg(R.string.wrong_data)
 
     }
 
     fun doSignUp(email: String, pass1: String, pass2: String) {
 
         if (email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
-            viewState.onError(R.string.empty_field)
+            viewState.showMsg(R.string.empty_field)
             return
         }
 
-        if(!isEmail(email)) {
-            viewState.onError(R.string.wrong_email)
+        if(!email.isEmailValid()) {
+            viewState.showMsg(R.string.wrong_email)
             return
         }
 
         if (pass1 != pass2){
-            viewState.onError(R.string.not_equal_passwords)
+            viewState.showMsg(R.string.not_equal_passwords)
             return
         }
 
         if(userRepo.isRegistered(email, pass1)){
-            viewState.onError(R.string.wrong_email)
+            viewState.showMsg(R.string.wrong_email)
             return
         }
 
             userRepo.addUser(email, pass1)
-            viewState.onSuccess(R.string.successful)
+            viewState.showMsg(R.string.successful)
 
     }
 
-    fun onvTvLogInClicked() {
+    fun onSwitchedLogInClicked() {
         viewState.goToLogInForm()
     }
 
-    fun onvTvSignUpClicked() {
+    fun onSwitchedSignUpClicked() {
         viewState.goToSignUpForm()
     }
 
-    fun onvIvKeepLogInClicked(){
+    fun onKeepLogInClicked(){
         viewState.keepLoggedIn()
     }
 
-    fun onvFlLogInClicked(){
-        viewState.goToAccount()
+    fun onLogInClicked(){
+        viewState.doLogIn()
     }
 
-    fun onvFlSignUpClicked(){
+    fun onSignUpClicked(){
         viewState.createAccount()
     }
 
-    fun onvTvRecoverPassClicked(){
+    fun onRecoverPassClicked(){
         viewState.recoverPassword()
     }
 
     /* MARK : Assistant methods */
-    private fun isEmail(string: String): Boolean{
-        val matchResult = Regex(""".+@.+\..+""").find(string)
-        return matchResult != null
-    }
 }
