@@ -36,22 +36,22 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
 
     private fun initOnClickListeners(){
         vFlSignUp.setOnClickListener {
-            loginPresenter.onvFlSignUpClicked()
+            loginPresenter.onSignUpClicked()
         }
         vFlLogIn.setOnClickListener {
-            loginPresenter.onvFlLogInClicked()
+            loginPresenter.onLogInClicked()
         }
         vTvLogIn.setOnClickListener {
-            loginPresenter.onvTvLogInClicked()
+            loginPresenter.onSwitchedLogInClicked()
         }
         vTvSignUp.setOnClickListener {
-            loginPresenter.onvTvSignUpClicked()
+            loginPresenter.onSwitchedSignUpClicked()
         }
         vIvKeepLogIn.setOnClickListener {
-            loginPresenter.onvIvKeepLogInClicked()
+            loginPresenter.onKeepLogInClicked()
         }
         vTvRecoverPass.setOnClickListener {
-            loginPresenter.onvTvRecoverPassClicked()
+            loginPresenter.onRecoverPassClicked()
         }
     }
 
@@ -73,15 +73,12 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
 
 
     /* MARK:  View Implementation */
-    override fun onSuccess(message: Int) {
+
+    override fun showMsg(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun onError(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onError(@StringRes message : Int) {
+    override fun showMsg(@StringRes message : Int) {
         Toast.makeText(this, getString(message), Toast.LENGTH_SHORT).show()
     }
 
@@ -108,7 +105,7 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         else vIvKeepLogIn.setBackgroundResource(R.drawable.right)
     }
 
-    override fun goToAccount() {
+    override fun doLogIn() {
         loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPass1.text.toString())
     }
 
@@ -120,8 +117,9 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         startActivity(Intent(this, RecoverPassword::class.java))
     }
 
-    override fun showAccount() {
+    override fun goToAccount() {
         startActivity(Intent(this, Account::class.java))
+        finish()
     }
 }
 
