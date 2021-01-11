@@ -16,6 +16,8 @@
     <string name="successful">Successful</string>
     <string name="wrong_data">Wrong email or password</string>
     <string name="not_equal_passwords">Passwords aren\'t equal</string>
+    <string name="log_out">Log out</string>
+
 
 
 </resources>

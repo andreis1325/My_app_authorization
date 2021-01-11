@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Account"></activity>
+        <activity android:name=".ui.account.Account"></activity>
         <activity
-            android:name=".RecoverPassword"
+            android:name=".ui.recoverpassword.RecoverPassword"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.login.LoginActivity"

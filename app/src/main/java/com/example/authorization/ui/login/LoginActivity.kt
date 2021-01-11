@@ -11,10 +11,10 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
-import com.example.authorization.Account
+import com.example.authorization.ui.account.Account
 import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.R
-import com.example.authorization.RecoverPassword
+import com.example.authorization.ui.recoverpassword.RecoverPassword
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
 
@@ -26,20 +26,31 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
     @InjectPresenter
     lateinit var loginPresenter : LoginPresenter
 
+
     override fun getLayoutId(): Int = R.layout.activity_main
 
+
     override fun onCreateActivity(savedInstanceState: Bundle?) {
+
+        loginPresenter.onCreate()
         showTextLogo()
         showImageLogo()
         initOnClickListeners()
     }
 
     private fun initOnClickListeners(){
+
         vFlSignUp.setOnClickListener {
-            loginPresenter.onSignUpClicked()
+            loginPresenter.doSignUp(vEtEmail.text.toString(), vEtPass1.text.toString(), vEtPass2.text.toString())
         }
         vFlLogIn.setOnClickListener {
-            loginPresenter.onLogInClicked()
+
+            if(ContextCompat.getDrawable(this, R.drawable.right)?.constantState != null) {
+                val isSaveData: Boolean = vIvKeepLogIn.background.constantState?.equals(
+                    ContextCompat.getDrawable(this, R.drawable.right)?.constantState)!!
+
+                loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPass1.text.toString(), isSaveData)
+            }
         }
         vTvLogIn.setOnClickListener {
             loginPresenter.onSwitchedLogInClicked()
@@ -88,6 +99,7 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         vLlRepeatPass.gone()
         vFlLogIn.visible()
         vFlSignUp.gone()
+        vLlKeepLogIn.visible()
     }
 
     override fun goToSignUpForm(){
@@ -96,6 +108,7 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         vLlRepeatPass.visible()
         vFlLogIn.gone()
         vFlSignUp.visible()
+        vLlKeepLogIn.gone()
 
     }
 
@@ -103,14 +116,6 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         if (vIvKeepLogIn.background.constantState?.equals(ContextCompat.getDrawable(this, R.drawable.right)?.constantState)!!)
             vIvKeepLogIn.setBackgroundResource(R.drawable.wrong)
         else vIvKeepLogIn.setBackgroundResource(R.drawable.right)
-    }
-
-    override fun doLogIn() {
-        loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPass1.text.toString())
-    }
-
-    override fun createAccount(){
-        loginPresenter.doSignUp(vEtEmail.text.toString(), vEtPass1.text.toString(), vEtPass2.text.toString())
     }
 
     override fun recoverPassword(){
