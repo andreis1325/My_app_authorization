@@ -9,8 +9,6 @@ interface LoginView : BaseMvpView {
         fun goToLogInForm()
         fun goToSignUpForm()
         fun keepLoggedIn()
-        fun doLogIn()
-        fun createAccount()
         fun recoverPassword()
         fun goToAccount()
         fun showMsg(message: String)

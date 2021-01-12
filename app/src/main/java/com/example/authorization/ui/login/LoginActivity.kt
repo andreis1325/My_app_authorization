@@ -11,14 +11,15 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
-import com.example.authorization.Account
+import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.R
-import com.example.authorization.RecoverPassword
+import com.example.authorization.ui.recoverpassword.RecoverPassword
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
 
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 
 class LoginActivity :  BaseMvpActivity(), LoginView {
@@ -26,29 +27,30 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
     @InjectPresenter
     lateinit var loginPresenter : LoginPresenter
 
+
     override fun getLayoutId(): Int = R.layout.activity_main
 
     override fun onCreateActivity(savedInstanceState: Bundle?) {
+
+        loginPresenter.onCreate()
         showTextLogo()
         showImageLogo()
         initOnClickListeners()
     }
 
     private fun initOnClickListeners(){
+
         vFlSignUp.setOnClickListener {
-            loginPresenter.onSignUpClicked()
+            loginPresenter.doSignUp(vEtEmail.text.toString(), vEtPassword.text.toString(), vEtConfirmPassword.text.toString())
         }
         vFlLogIn.setOnClickListener {
-            loginPresenter.onLogInClicked()
+            loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPassword.text.toString(), vMcbKeepLoggedIn.isKeepLoggedIn)
         }
         vTvLogIn.setOnClickListener {
             loginPresenter.onSwitchedLogInClicked()
         }
         vTvSignUp.setOnClickListener {
             loginPresenter.onSwitchedSignUpClicked()
-        }
-        vIvKeepLogIn.setOnClickListener {
-            loginPresenter.onKeepLogInClicked()
         }
         vTvRecoverPass.setOnClickListener {
             loginPresenter.onRecoverPassClicked()
@@ -64,10 +66,10 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
 
     private fun showTextLogo(){
         val spannableString = SpannableString(getString(R.string.logo))
-        val foregroundSpan1 = ForegroundColorSpan(Color.WHITE)
-        val foregroundSpan2 = ForegroundColorSpan(ContextCompat.getColor(this, R.color.orange))
-        spannableString.setSpan(foregroundSpan1, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(foregroundSpan2, 3, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val foregroundSpanFirst = ForegroundColorSpan(Color.WHITE)
+        val foregroundSpanSecond = ForegroundColorSpan(ContextCompat.getColor(this, R.color.orange))
+        spannableString.setSpan(foregroundSpanFirst, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(foregroundSpanSecond, 3, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         vTvLogo.text = spannableString
     }
 
@@ -86,31 +88,22 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         vTvLogIn.setTextColor(ContextCompat.getColor(this, R.color.orange))
         vTvSignUp.setTextColor(ContextCompat.getColor(this, R.color.white))
         vLlRepeatPass.gone()
-        vFlLogIn.visible()
         vFlSignUp.gone()
+        vFlLogIn.visible()
+        vLlKeepLogIn.visible()
     }
 
     override fun goToSignUpForm(){
         vTvLogIn.setTextColor(ContextCompat.getColor(this, R.color.white))
         vTvSignUp.setTextColor(ContextCompat.getColor(this, R.color.orange))
-        vLlRepeatPass.visible()
+        vLlKeepLogIn.gone()
         vFlLogIn.gone()
         vFlSignUp.visible()
-
+        vLlRepeatPass.visible()
     }
 
     override  fun keepLoggedIn(){
-        if (vIvKeepLogIn.background.constantState?.equals(ContextCompat.getDrawable(this, R.drawable.right)?.constantState)!!)
-            vIvKeepLogIn.setBackgroundResource(R.drawable.wrong)
-        else vIvKeepLogIn.setBackgroundResource(R.drawable.right)
-    }
-
-    override fun doLogIn() {
-        loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPass1.text.toString())
-    }
-
-    override fun createAccount(){
-        loginPresenter.doSignUp(vEtEmail.text.toString(), vEtPass1.text.toString(), vEtPass2.text.toString())
+        vMcbKeepLoggedIn.setOnKeepLoggedInClickListener()
     }
 
     override fun recoverPassword(){
@@ -118,7 +111,7 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
     }
 
     override fun goToAccount() {
-        startActivity(Intent(this, Account::class.java))
+        startActivity(Intent(this, AccountActivity::class.java))
         finish()
     }
 }
