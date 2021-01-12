@@ -47,9 +47,9 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             viewState.showMsg(R.string.wrong_data)
     }
 
-    fun doSignUp(email: String, password: String, confirm_password: String) {
+    fun doSignUp(email: String, password: String, confirmPassword: String) {
 
-        if (email.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             viewState.showMsg(R.string.empty_field)
             return
         }
@@ -59,7 +59,7 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if (password != confirm_password){
+        if (password != confirmPassword){
             viewState.showMsg(R.string.not_equal_passwords)
             return
         }
@@ -79,10 +79,6 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
 
     fun onSwitchedSignUpClicked() {
         viewState.goToSignUpForm()
-    }
-
-    fun onKeepLogInClicked(){
-        viewState.keepLoggedIn()
     }
 
     fun onRecoverPassClicked(){

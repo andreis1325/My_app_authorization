@@ -19,5 +19,6 @@ class AccountPresenter() : BaseMvpPresenter<AccountView>() {
 
     fun logOut(){
         sharedPreference.isLoggedIn = false
+        viewState.closeActivity()
     }
 }
