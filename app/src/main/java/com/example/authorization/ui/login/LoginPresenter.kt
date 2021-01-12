@@ -39,18 +39,17 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if(userRepo.isRegistered(email, password)){
+        if(userRepo.isRegistered(email)){
             if(isKeepData)
                 updateSharedPreference(email, password)
             viewState.goToAccount()
         } else
             viewState.showMsg(R.string.wrong_data)
-
     }
 
-    fun doSignUp(email: String, pass1: String, pass2: String) {
+    fun doSignUp(email: String, password: String, confirm_password: String) {
 
-        if (email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
             viewState.showMsg(R.string.empty_field)
             return
         }
@@ -60,17 +59,17 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if (pass1 != pass2){
+        if (password != confirm_password){
             viewState.showMsg(R.string.not_equal_passwords)
             return
         }
 
-        if(userRepo.isRegistered(email, pass1)){
+        if(userRepo.isRegistered(email)){
             viewState.showMsg(R.string.wrong_data)
             return
         }
 
-            userRepo.addUser(email, pass1)
+            userRepo.addUser(email, password)
             viewState.goToAccount()
     }
 

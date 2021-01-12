@@ -15,7 +15,7 @@ class UserRepo{
             userStorage.addUser(UserModel(email,password))
         }
 
-        fun isRegistered(email: String, password: String): Boolean{
-            return userStorage.isRegistered(email, password)
+        fun isRegistered(email: String): Boolean{
+            return userStorage.isRegistered(email)
         }
 }

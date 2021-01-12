@@ -16,7 +16,7 @@ class UserStorage {
         }
     }
 
-    fun isRegistered(email: String, password: String):Boolean {
+    fun isRegistered(email: String):Boolean {
         val register: UserModel? = Realm.getDefaultInstance().where(UserModel::class.java)
             ?.equalTo("email", email)
             ?.findFirst()
