@@ -7,7 +7,7 @@ import com.example.authorization.R
 import com.example.authorization.model.isLoggedIn
 import com.example.authorization.model.userEmail
 import com.example.authorization.model.userPassword
-import com.example.authorization.repo.UserRepo
+import com.example.authorization.net.repo.UserRepo
 import com.example.authorization.ui.base.BaseMvpPresenter
 import com.example.authorization.utils.extensions.isEmailValid
 import org.kodein.di.instance

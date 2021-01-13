@@ -1,18 +1,28 @@
 package com.example.authorization
 
 import android.app.Application
-import android.content.Context
 import android.content.SharedPreferences
+
 import com.example.authorization.model.PreferencesUtils
-import com.example.authorization.repo.UserRepo
+import com.example.authorization.net.repo.ArticleRepo
+import com.example.authorization.net.repo.BlogRepo
+import com.example.authorization.net.repo.ReportRepo
+
+import com.example.authorization.net.repo.UserRepo
+
+import com.example.authorization.net.services.ApiRest
+import com.example.authorization.net.services.ArticleService
+import com.example.authorization.net.services.BlogService
+import com.example.authorization.net.services.ReportService
 import com.example.authorization.storage.UserStorage
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.rx.RealmObservableFactory
 import org.kodein.di.DI
 import org.kodein.di.bind
+import org.kodein.di.instance
 import org.kodein.di.singleton
-import java.util.function.LongFunction
+import retrofit2.Retrofit
 
 private lateinit var kodeinStored: DI
 
@@ -25,6 +35,34 @@ class MyApp : Application() {
             PreferencesUtils.getSharedPreferences(applicationContext)
         }
         bind<UserStorage>() with singleton { UserStorage() }
+        bind<Retrofit>()with singleton { ApiRest.getApi() }
+
+        bind<ArticleRepo>() with singleton{
+            ArticleRepo(
+                instance<Retrofit>().create(
+                    ArticleService::class.java
+                )
+            )
+        }
+
+        bind<BlogRepo>() with singleton{
+            BlogRepo(
+                instance<Retrofit>().create(
+                    BlogService::class.java
+                ),
+                instance()
+            )
+        }
+
+        bind<ReportRepo>() with singleton{
+            ReportRepo(
+                instance<Retrofit>().create(
+                    ReportService::class.java
+                ),
+                instance()
+            )
+        }
+
     }
 
 
