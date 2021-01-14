@@ -17,7 +17,10 @@
     <string name="wrong_data">Wrong email or password</string>
     <string name="not_equal_passwords">Passwords aren\'t equal</string>
     <string name="log_out">Log out</string>
-
+    <string name="news">news</string>
+    <string name="article">article</string>
+    <string name="blog">blog</string>
+    <string name="report">report</string>
 
 
 </resources>

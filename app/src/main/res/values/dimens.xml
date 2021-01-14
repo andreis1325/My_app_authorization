@@ -4,5 +4,9 @@
 
 
     <dimen name="sp_16">16sp</dimen>
+    <dimen name="dp_0">0dp</dimen>
+    <dimen name="sp_22">22sp</dimen>
+    <dimen name="dp_28">28dp</dimen>
+    <dimen name="dp_6">6dp</dimen>
 
 </resources>
