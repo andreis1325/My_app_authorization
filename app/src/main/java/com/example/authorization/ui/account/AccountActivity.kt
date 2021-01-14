@@ -26,7 +26,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     private fun initOnClickListeners(){
         /*vBLogOut.setOnClickListener(){
             accountPresenter.logOut()
-        }*/
+        }*///
     }
 
     override fun closeActivity(){
