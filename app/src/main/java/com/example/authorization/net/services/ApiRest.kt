@@ -19,7 +19,7 @@ class ApiRest {
     companion object {
         private val preferences: SharedPreferences by MyApp.kodein.instance()
 
-        private var BASE_URL = "http://185.41.161.60:8081/"
+        private var BASE_URL = "https://test.spaceflightnewsapi.net"
 
         internal fun getApi(): Retrofit {
 
@@ -28,7 +28,8 @@ class ApiRest {
 
             val client = getOkHttpClient()
 
-            val builder = Retrofit.Builder().baseUrl(BASE_URL)
+            val builder = Retrofit.Builder()
+                .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(getGsonConverterFactory())

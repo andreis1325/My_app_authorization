@@ -12,8 +12,4 @@ class AccountPresenter() : BaseMvpPresenter<AccountView>() {
 
     private val sharedPreference by MyApp.kodein.instance<SharedPreferences>()
 
-    fun logOut(){
-        sharedPreference.isLoggedIn = false
-        viewState.closeActivity()
-    }
 }

@@ -1,12 +1,12 @@
 package com.example.authorization.net.responses
 
-data class ArticleResponse (val items: List<ArticleItem>)
+data class ArticleResponse (val items: List<Article>)
 
-data class ArticleItem(
+data class Article(
 
     var id: String? = null,
     var featured: Boolean? = null,
-    var titile: String? = null,
+    var title: String? = null,
     var url:String? = null,
     var imageUrl: String? = null,
     var newsSite: String? = null,

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface BlogService{
 
     @GET("/api/v2/blogs")
-    fun getBlogs(): Observable<BlogResponse>
+    fun getBlogs(): Observable<List<BlogResponse>>
 
     @GET("/api/v2/blogs/{id}")
     fun getBlogById(

@@ -9,7 +9,7 @@ import retrofit2.http.Path
 interface ReportService{
 
     @GET("/api/v2/reports")
-    fun getReports(): Observable<ReportResponse>
+    fun getReports(): Observable<List<ReportResponse>>
 
     @GET("/api/v2/reports/{id}")
     fun getReportById(

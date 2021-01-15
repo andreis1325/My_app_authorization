@@ -15,6 +15,7 @@ import com.example.authorization.net.services.ArticleService
 import com.example.authorization.net.services.BlogService
 import com.example.authorization.net.services.ReportService
 import com.example.authorization.storage.UserStorage
+import io.reactivex.disposables.CompositeDisposable
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.rx.RealmObservableFactory
@@ -37,6 +38,7 @@ class MyApp : Application() {
         bind<UserStorage>() with singleton { UserStorage() }
         bind<Retrofit>()with singleton { ApiRest.getApi() }
 
+        bind<CompositeDisposable>( )with singleton { CompositeDisposable() }
         bind<ArticleRepo>() with singleton{
             ArticleRepo(
                 instance<Retrofit>().create(
@@ -49,8 +51,7 @@ class MyApp : Application() {
             BlogRepo(
                 instance<Retrofit>().create(
                     BlogService::class.java
-                ),
-                instance()
+                )
             )
         }
 
@@ -58,8 +59,7 @@ class MyApp : Application() {
             ReportRepo(
                 instance<Retrofit>().create(
                     ReportService::class.java
-                ),
-                instance()
+                )
             )
         }
 
