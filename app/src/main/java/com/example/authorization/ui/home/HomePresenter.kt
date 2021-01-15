@@ -30,7 +30,6 @@ class HomePresenter() : BaseMvpPresenter<HomeView>() {
 
             }, {
 
-
             }
             ))
 

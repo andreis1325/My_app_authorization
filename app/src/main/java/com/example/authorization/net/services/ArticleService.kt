@@ -14,10 +14,10 @@ interface ArticleService{
     @GET("/api/v2/articles/{id}")
     fun getArticlesById(
         @Path("id") id: String
-    ): Observable<ArticleResponse>
+    ): Observable<Article>
 
     @GET("/api/v2/articles/launch/{id}")
     fun getArticlesLinkedByLaunch(
         @Path("id") id:String
-    ):Observable<ArticleResponse>
+    ):Observable<Article>
 }

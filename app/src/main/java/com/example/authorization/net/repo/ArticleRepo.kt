@@ -10,7 +10,7 @@ class ArticleRepo(private val api: ArticleService){
 
     fun getArticle(): Observable<MutableList<Article>> = api.getArticles()
 
-    fun getArticlesById(id: String): Observable<ArticleResponse> = api.getArticlesById(id)
+    fun getArticlesById(id: String): Observable<Article> = api.getArticlesById(id)
 
-    fun getArticlesLinkedByLaunch(id: String): Observable<ArticleResponse> = api.getArticlesLinkedByLaunch(id)
+    fun getArticlesLinkedByLaunch(id: String): Observable<Article> = api.getArticlesLinkedByLaunch(id)
 }
