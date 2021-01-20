@@ -12,5 +12,7 @@
     <color name="grey">#4A4848</color>
     <color name="orange">#EF9108</color>
     <color name="hint">#979593</color>
+    <color name="bgItemRecyclerView">#F1EFED</color>
+
 
 </resources>

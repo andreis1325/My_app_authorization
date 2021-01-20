@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/vCvItemNews"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginBottom="@dimen/dp_8"
+    app:cardCornerRadius="@dimen/dp_16">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        app:layout_constraintCircleRadius="@dimen/dp_16">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:cardCornerRadius="@dimen/dp_16">
+
+            <ImageView
+                android:id="@+id/vIvItemImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_230"
+                android:paddingTop="@dimen/dp_4"
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_190"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:background="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/vTvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/orange"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/vTvItemTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold"
+            tools:text="The Least imaginative Holiday gift Is Everyone Will be Getting" />
+
+        <TextView
+            android:id="@+id/vTvItemSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginRight="@dimen/dp_16"
+            tools:text="The Least imaginative Holiday gift Is Everyone" />
+
+        <TextView
+            android:id="@+id/vTvExample"
+            android:layout_width="0dp"
+            android:layout_height="0dp" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

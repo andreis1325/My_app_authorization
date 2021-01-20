@@ -25,6 +25,7 @@
     <string name="home">home</string>
     <string name="bookmarks">bookmarks</string>
     <string name="profile">profile</string>
+    <string name="search">Search..</string>
 
 
 </resources>

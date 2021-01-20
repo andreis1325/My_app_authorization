@@ -1,75 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/dp_16"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16">
+
+        <EditText
+            android:id="@+id/vEtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/search"
+            android:visibility="gone" />
 
         <TextView
-            android:layout_width="@dimen/dp_0"
-            android:layout_weight="1"
+            android:id="@+id/vTvNews"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/news"
+            android:gravity="center_vertical"
             android:text="@string/news"
-
             android:textColor="@color/black"
             android:textSize="@dimen/sp_22"
-            android:fontFamily="@font/news"
-            android:gravity="center_vertical"/>
+            android:visibility="visible" />
 
         <ImageView
             android:id="@+id/vIvSearch"
             android:layout_width="@dimen/dp_28"
-
-            android:layout_marginRight="@dimen/dp_16"
-            android:layout_marginEnd="@dimen/dp_16"
             android:layout_height="@dimen/dp_28"
-            android:src="@drawable/search"/>
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/search" />
+
+        <ImageView
+            android:id="@+id/vIvCross"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/ic_cross"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/vIvBell"
             android:layout_width="@dimen/dp_28"
             android:layout_height="@dimen/dp_28"
             android:src="@drawable/bell" />
-
-
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_16"
-        app:tabInlineLabel="false"
-        app:tabIndicatorHeight="@dimen/dp_6">
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        app:tabIndicatorHeight="@dimen/dp_6"
+        app:tabInlineLabel="false">
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/article"
-            />
+            android:id="@+id/vTiArticle"
+            style="@style/TabItem"
+            android:text="@string/article" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TabItem"
             android:text="@string/blog" />
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/TabItem"
             android:text="@string/report" />
     </com.google.android.material.tabs.TabLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/vRvNews"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
-        android:layout_marginTop="@dimen/dp_16"
-        android:layout_weight="1" />
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/bgItemRecyclerView"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:overScrollMode="never"
+        android:paddingLeft="@dimen/dp_16"
+        android:paddingRight="@dimen/dp_16"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>
