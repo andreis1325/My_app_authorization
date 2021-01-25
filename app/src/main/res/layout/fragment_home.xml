@@ -68,17 +68,17 @@
         <com.google.android.material.tabs.TabItem
             android:id="@+id/vTiArticle"
             style="@style/TabItem"
-            android:text="@string/article" />
+            android:text="@string/first_menu_item" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/vTiBlog"
             style="@style/TabItem"
-            android:text="@string/blog" />
+            android:text="@string/second_menu_item" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/vTiReport"
             style="@style/TabItem"
-            android:text="@string/report" />
+            android:text="@string/third_menu_item" />
 
     </com.google.android.material.tabs.TabLayout>
 

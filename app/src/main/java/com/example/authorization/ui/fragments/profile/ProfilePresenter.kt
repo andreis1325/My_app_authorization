@@ -10,10 +10,10 @@ import org.kodein.di.instance
 @InjectViewState
 class ProfilePresenter : BaseMvpPresenter<ProfileView>() {
 
-    private val sharedPreference by MyApp.kodein.instance<SharedPreferences>()
+    private val authData by MyApp.kodein.instance<SharedPreferences>()
 
     fun exit(){
-        sharedPreference.isLoggedIn = false
+        authData.isLoggedIn = false
         viewState.closeActivity()
     }
 

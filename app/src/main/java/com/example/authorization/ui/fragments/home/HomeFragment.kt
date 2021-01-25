@@ -23,7 +23,7 @@ class HomeFragment : BaseMvpFragment(),
     @InjectPresenter
     lateinit var homePresenter: HomePresenter
 
-    lateinit var adapter: ArticleAdapter
+    private lateinit var articleAdapter: ArticleAdapter
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -35,7 +35,7 @@ class HomeFragment : BaseMvpFragment(),
 
     override fun onViewCreated(view: View) {
         initAdapter()
-        homePresenter.onCreate(adapter.itemClickObservable)
+        homePresenter.onCreate(articleAdapter.itemClickObservable)
         initOnClickedListener()
     }
 
@@ -51,17 +51,17 @@ class HomeFragment : BaseMvpFragment(),
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.text.toString()){
-                    "article" -> homePresenter.getNews(MenuItem.Article)
-                    "blog" -> homePresenter.getNews(MenuItem.Blog)
-                    "report" -> homePresenter.getNews(MenuItem.Report)
+                    getString(R.string.first_menu_item) -> homePresenter.onTubSwitched(MenuItem.Article)
+                    getString(R.string.second_menu_item) -> homePresenter.onTubSwitched(MenuItem.Blog)
+                    getString(R.string.third_menu_item) -> homePresenter.onTubSwitched(MenuItem.Report)
                 }
             }
         })
     }
 
     private fun initAdapter() {
-        adapter = ArticleAdapter()
-        vRvNews.adapter = adapter
+        articleAdapter = ArticleAdapter()
+        vRvNews.adapter = articleAdapter
     }
 
     // MARK: View implementation
@@ -76,7 +76,7 @@ class HomeFragment : BaseMvpFragment(),
     }
 
     override fun setNews(it: ArrayList<ArticleResponse>) {
-        adapter.setItems(it)
+        articleAdapter.setItems(it)
     }
 
     override fun showForm() {
@@ -103,7 +103,7 @@ class HomeFragment : BaseMvpFragment(),
         vEtSearch?.addTextChangedListener(object : SimpleTextWatcher() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                adapter.setItems(homePresenter.findSearchedItems(vEtSearch.text.toString()))
+                articleAdapter.setItems(homePresenter.findSearchedItems(vEtSearch.text.toString()))
             }
         }
         )

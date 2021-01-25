@@ -16,14 +16,14 @@ import org.kodein.di.instance
 class LoginPresenter() : BaseMvpPresenter<LoginView>() {
 
     private val userRepo by MyApp.kodein.instance<UserRepo>()
-    private val sharedPreference by MyApp.kodein.instance<SharedPreferences>()
+    private val keepAuthData by MyApp.kodein.instance<SharedPreferences>()
 
     fun onCreate() {
         logInOrGoToAccount()
     }
 
     private fun logInOrGoToAccount() {
-        if (sharedPreference.isLoggedIn)
+        if (keepAuthData.isLoggedIn)
             viewState.goToAccount()
     }
 
@@ -87,8 +87,8 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
 
     // MARK : Assistant methods
     private fun updateSharedPreference(email: String, password: String) {
-        sharedPreference.userEmail = email
-        sharedPreference.userPassword = password
-        sharedPreference.isLoggedIn = true
+        keepAuthData.userEmail = email
+        keepAuthData.userPassword = password
+        keepAuthData.isLoggedIn = true
     }
 }

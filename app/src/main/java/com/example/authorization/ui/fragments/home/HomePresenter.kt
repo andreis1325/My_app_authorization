@@ -26,7 +26,7 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
     private lateinit var itemName: MenuItem
 
     fun onCreate(itemClickObservable: Observable<ArticleResponse>) {
-        getNews()
+        setNews(getNews())
         initOnItemClickListener(itemClickObservable)
     }
 
@@ -60,10 +60,13 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         )
     }
 
-    fun getNews(itemName: MenuItem = MenuItem.Article) {
+    fun onTubSwitched(itemName: MenuItem ){
+        setNews(getNews(itemName))
+    }
+
+    private fun getNews(itemName: MenuItem = MenuItem.Article): Observable<ArrayList<ArticleResponse>> {
 
         lateinit var articleResponse: Observable<ArrayList<ArticleResponse>>
-
         when (itemName) {
             is MenuItem.Article -> {
                 articleResponse = articleRepo.getArticles()
@@ -78,17 +81,20 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
                 this.itemName = MenuItem.Report
             }
         }
-
-        addDisposable(articleResponse
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                newsItems.clear()
-                newsItems.addAll(it)
-                viewState.setNews(it)
-            }, {
-
-            }
-            ))
+        return articleResponse
     }
+
+        private fun setNews(articleResponse: Observable<ArrayList<ArticleResponse>>){
+            addDisposable(articleResponse
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    newsItems.clear()
+                    newsItems.addAll(it)
+                    viewState.setNews(it)
+                }, {
+
+                }
+                ))
+        }
 }
