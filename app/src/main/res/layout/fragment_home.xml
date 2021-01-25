@@ -57,6 +57,7 @@
     </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/vTlMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp_16"
@@ -70,12 +71,15 @@
             android:text="@string/article" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/vTiBlog"
             style="@style/TabItem"
             android:text="@string/blog" />
 
         <com.google.android.material.tabs.TabItem
+            android:id="@+id/vTiReport"
             style="@style/TabItem"
             android:text="@string/report" />
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -84,11 +88,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/bgItemRecyclerView"
-        android:orientation="vertical"
-        android:clickable="true"
-        android:focusable="true"
-        android:overScrollMode="never"
         android:paddingLeft="@dimen/dp_16"
         android:paddingRight="@dimen/dp_16"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 </LinearLayout>

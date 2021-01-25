@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <dimen name="dp_16">16dp</dimen>
-
-
     <dimen name="sp_16">16sp</dimen>
     <dimen name="sp_22">22sp</dimen>
     <dimen name="dp_28">28dp</dimen>
@@ -28,5 +27,10 @@
     <dimen name="sp_14">14sp</dimen>
     <dimen name="dp_190">190dp</dimen>
     <dimen name="dp_12">12dp</dimen>
+    <dimen name="dp_300">300dp</dimen>
+    <dimen name="dp_220">220dp</dimen>
+    <dimen name="dp_240">240dp</dimen>
+    <dimen name="dp_260">260dp</dimen>
+    <dimen name="dp_60dp">60dp</dimen>
 
 </resources>

@@ -5,11 +5,12 @@ import com.example.authorization.net.responses.ArticleResponse
 
 import com.example.authorization.net.services.ArticleService
 
-class ArticleRepo(private val api: ArticleService){
+class ArticleRepo(private val api: ArticleService) {
 
-    fun getArticle(): Observable<ArrayList<ArticleResponse>> = api.getArticles()
+    fun getArticles(): Observable<ArrayList<ArticleResponse>> = api.getArticles()
 
-    fun getArticlesById(id: String): Observable<ArticleResponse> = api.getArticlesById(id)
+    fun getArticleById(id: String): Observable<ArticleResponse> = api.getArticleById(id)
 
-    fun getArticlesLinkedByLaunch(id: String): Observable<ArticleResponse> = api.getArticlesLinkedByLaunch(id)
+    fun getArticlesLinkedByLaunch(id: String): Observable<ArticleResponse> =
+        api.getArticlesLinkedByLaunch(id)
 }

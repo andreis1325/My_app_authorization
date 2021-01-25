@@ -17,16 +17,12 @@ import com.example.authorization.R
 import com.example.authorization.ui.recoverpassword.RecoverPassword
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
-
 import kotlinx.android.synthetic.main.activity_main.*
 
-
-
-class LoginActivity :  BaseMvpActivity(), LoginView {
+class LoginActivity : BaseMvpActivity(), LoginView {
 
     @InjectPresenter
-    lateinit var loginPresenter : LoginPresenter
-
+    lateinit var loginPresenter: LoginPresenter
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
@@ -38,13 +34,21 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         initOnClickListeners()
     }
 
-    private fun initOnClickListeners(){
+    private fun initOnClickListeners() {
 
         vFlSignUp.setOnClickListener {
-            loginPresenter.doSignUp(vEtEmail.text.toString(), vEtPassword.text.toString(), vEtConfirmPassword.text.toString())
+            loginPresenter.doSignUp(
+                vEtEmail.text.toString(),
+                vEtPassword.text.toString(),
+                vEtConfirmPassword.text.toString()
+            )
         }
         vFlLogIn.setOnClickListener {
-            loginPresenter.doLogIn(vEtEmail.text.toString(), vEtPassword.text.toString(), vMcbKeepLoggedIn.isKeepLoggedIn)
+            loginPresenter.doLogIn(
+                vEtEmail.text.toString(),
+                vEtPassword.text.toString(),
+                vMcbKeepLoggedIn.isKeepLoggedIn
+            )
         }
         vTvLogIn.setOnClickListener {
             loginPresenter.onSwitchedLogInClicked()
@@ -57,34 +61,37 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         }
     }
 
-    private fun showImageLogo(){
+    private fun showImageLogo() {
         Glide.with(this)
             .load(R.drawable.fox)
             .placeholder(R.drawable.fox)
             .into(vIvLogo)
     }
 
-    private fun showTextLogo(){
+    private fun showTextLogo() {
         val spannableString = SpannableString(getString(R.string.logo))
         val foregroundSpanFirst = ForegroundColorSpan(Color.WHITE)
         val foregroundSpanSecond = ForegroundColorSpan(ContextCompat.getColor(this, R.color.orange))
         spannableString.setSpan(foregroundSpanFirst, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(foregroundSpanSecond, 3, spannableString.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            foregroundSpanSecond,
+            3,
+            spannableString.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
         vTvLogo.text = spannableString
     }
 
-
     /* MARK:  View Implementation */
-
     override fun showMsg(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showMsg(@StringRes message : Int) {
+    override fun showMsg(@StringRes message: Int) {
         Toast.makeText(this, getString(message), Toast.LENGTH_SHORT).show()
     }
 
-    override fun goToLogInForm(){
+    override fun goToLogInForm() {
         vTvLogIn.setTextColor(ContextCompat.getColor(this, R.color.orange))
         vTvSignUp.setTextColor(ContextCompat.getColor(this, R.color.white))
         vLlRepeatPass.gone()
@@ -93,7 +100,7 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         vLlKeepLogIn.visible()
     }
 
-    override fun goToSignUpForm(){
+    override fun goToSignUpForm() {
         vTvLogIn.setTextColor(ContextCompat.getColor(this, R.color.white))
         vTvSignUp.setTextColor(ContextCompat.getColor(this, R.color.orange))
         vLlKeepLogIn.gone()
@@ -102,11 +109,11 @@ class LoginActivity :  BaseMvpActivity(), LoginView {
         vLlRepeatPass.visible()
     }
 
-    override  fun keepLoggedIn(){
+    override fun keepLoggedIn() {
         vMcbKeepLoggedIn.setOnKeepLoggedInClickListener()
     }
 
-    override fun recoverPassword(){
+    override fun recoverPassword() {
         startActivity(Intent(this, RecoverPassword::class.java))
     }
 

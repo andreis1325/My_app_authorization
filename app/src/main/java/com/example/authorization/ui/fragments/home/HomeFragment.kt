@@ -1,28 +1,29 @@
-package com.example.authorization.ui.home
+package com.example.authorization.ui.fragments.home
 
-import android.content.Context
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.account.AccountActivity
-import com.example.authorization.ui.fragments.ExtendedNewsFragment
+import com.example.authorization.ui.fragments.extendednews.ExtendedNewsFragment
+import com.example.authorization.ui.fragments.home.articleadapter.ArticleAdapter
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
-import com.example.authorization.ui.home.adapter.MyAdapter
+import com.example.authorization.utils.expanded.SimpleOnTabListener
+import com.example.authorization.utils.expanded.SimpleTextWatcher
+import com.example.authorization.utils.transformations.MenuItem
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.collections.ArrayList
 
-
-class HomeFragment : BaseMvpFragment(), HomeView {
+class HomeFragment : BaseMvpFragment(),
+    HomeView {
 
     @InjectPresenter
     lateinit var homePresenter: HomePresenter
-    lateinit var adapter: MyAdapter
-    var newsItems = ArrayList<ArticleResponse>()
+
+    lateinit var adapter: ArticleAdapter
 
     companion object {
         fun newInstance(): HomeFragment {
@@ -45,10 +46,21 @@ class HomeFragment : BaseMvpFragment(), HomeView {
         vIvCross.setOnClickListener {
             homePresenter.onCrossClicked()
         }
+
+        vTlMenu.addOnTabSelectedListener(object : SimpleOnTabListener() {
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                when(tab?.text.toString()){
+                    "article" -> homePresenter.getNews(MenuItem.Article)
+                    "blog" -> homePresenter.getNews(MenuItem.Blog)
+                    "report" -> homePresenter.getNews(MenuItem.Report)
+                }
+            }
+        })
     }
 
     private fun initAdapter() {
-        adapter = MyAdapter()
+        adapter = ArticleAdapter()
         vRvNews.adapter = adapter
     }
 
@@ -65,7 +77,6 @@ class HomeFragment : BaseMvpFragment(), HomeView {
 
     override fun setNews(it: ArrayList<ArticleResponse>) {
         adapter.setItems(it)
-        newsItems.addAll(it)
     }
 
     override fun showForm() {
@@ -83,45 +94,18 @@ class HomeFragment : BaseMvpFragment(), HomeView {
         closeKeyboard()
     }
 
-    override fun goToArticleItem(it: ArticleResponse) {
-        (activity as? AccountActivity)?.goToItemNews(ExtendedNewsFragment.newInstance())
+    override fun goToArticleItem(id: String?, itemName: MenuItem) {
+        (activity as? AccountActivity)?.goToItemNews(ExtendedNewsFragment.newInstance(id, itemName))
     }
 
     // MARK: Assistant functions
     private fun textChangeListener() {
-        vEtSearch?.addTextChangedListener(object : TextWatcher {
-
-            override fun afterTextChanged(s: Editable?) {}
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        vEtSearch?.addTextChangedListener(object : SimpleTextWatcher() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                adapter?.setItems(findSearchedItems())
+                adapter.setItems(homePresenter.findSearchedItems(vEtSearch.text.toString()))
             }
         }
         )
-    }
-
-    private fun findSearchedItems(): ArrayList<ArticleResponse> {
-        var searchText = vEtSearch.text.toString().toLowerCase()
-        var searchedItems = ArrayList<ArticleResponse>()
-
-        for (item in newsItems) {
-            if (item.title?.indexOf(searchText) != -1)
-                searchedItems.add(item)
-        }
-        return searchedItems
-    }
-
-    private fun showKeyboard() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(vEtSearch, 0)
-    }
-
-    private fun closeKeyboard() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

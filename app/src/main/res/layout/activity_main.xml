@@ -40,9 +40,7 @@
             android:fontFamily="@font/preamble_font"
             android:text="@string/preamble"
             android:textColor="@color/white"
-            android:textSize="@dimen/sp_13">
-
-        </TextView>
+            android:textSize="@dimen/sp_13"/>
 
         <View
             android:layout_width="match_parent"
@@ -82,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up"
                 android:textColor="@color/white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -98,6 +97,7 @@
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
                 android:textColorHint="@color/hint" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -140,6 +140,7 @@
                 android:hint="@string/repeat_password"
                 android:inputType="textPassword"
                 android:textColorHint="@color/hint" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -173,7 +174,9 @@
                     android:layout_height="30dp"
                     android:layout_gravity="center_horizontal"
                     app:isKeepLoggedIn="false" />
+
             </FrameLayout>
+
         </LinearLayout>
 
         <FrameLayout
@@ -199,7 +202,9 @@
                     android:layout_height="@dimen/dp_30"
                     android:layout_gravity="center"
                     android:background="@drawable/key" />
+
             </FrameLayout>
+
         </FrameLayout>
 
         <FrameLayout
@@ -227,7 +232,9 @@
                     android:text="@string/sign_up"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_16" />
+
             </FrameLayout>
+
         </FrameLayout>
 
         <LinearLayout
@@ -260,7 +267,9 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_14" />
         </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>
 
 

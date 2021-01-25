@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Authorization</string>
     <string name="logo">poifox</string>
     <string name="preamble">Find the best place in town</string>
@@ -26,6 +27,7 @@
     <string name="bookmarks">bookmarks</string>
     <string name="profile">profile</string>
     <string name="search">Search..</string>
-
+    <string name="exit">Press once again to exit!</string>
+    <string name="go_to_site">Go to Site</string>
 
 </resources>

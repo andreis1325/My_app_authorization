@@ -5,9 +5,9 @@ import com.example.authorization.net.services.ReportService
 import io.reactivex.Observable
 
 
-class ReportRepo(private val api: ReportService){
+class ReportRepo(private val api: ReportService) {
 
-    fun getReport(): Observable<ArrayList<ArticleResponse>> = api.getReports()
+    fun getReports(): Observable<ArrayList<ArticleResponse>> = api.getReports()
 
-    fun getReportsById(id: String): Observable<ArticleResponse> = api.getReportById(id)
+    fun getReportById(id: String): Observable<ArticleResponse> = api.getReportById(id)
 }

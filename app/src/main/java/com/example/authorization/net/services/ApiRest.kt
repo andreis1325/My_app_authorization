@@ -41,7 +41,6 @@ class ApiRest {
         private fun getGsonConverterFactory(): Converter.Factory {
             return GsonConverterFactory.create(
                 GsonBuilder()
-//                    .registerTypeAdapter(ProjectResponse::class.java, ProjectResponseDeserializer())
                     .setLenient()
                     .create()
             )
@@ -50,8 +49,6 @@ class ApiRest {
         private fun getOkHttpClient(): OkHttpClient {
             return OkHttpClient()
                 .newBuilder()
-//                .addNetworkInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY })
-//                .addNetworkInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS })
                 .addInterceptor(HttpLoggingInterceptor().apply {
                     level = HttpLoggingInterceptor.Level.BODY
                 })
@@ -63,15 +60,11 @@ class ApiRest {
                 }
                 .addNetworkInterceptor(Interceptor { chain ->
                     val requestBuilder = chain.request().newBuilder()
-
-
-
                     chain.proceed(requestBuilder.build())
                 })
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
-//                .addInterceptor( HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.HEADERS } )
                 .build()
         }
     }

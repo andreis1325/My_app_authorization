@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ReportService{
+interface ReportService {
 
     @GET("/api/v2/reports")
     fun getReports(): Observable<ArrayList<ArticleResponse>>
@@ -14,5 +14,4 @@ interface ReportService{
     fun getReportById(
         @Path("id") id: String
     ): Observable<ArticleResponse>
-
 }

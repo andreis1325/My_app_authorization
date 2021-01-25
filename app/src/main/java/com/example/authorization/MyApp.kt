@@ -19,10 +19,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.realm.Realm
 import io.realm.RealmConfiguration
 import io.realm.rx.RealmObservableFactory
-import org.kodein.di.DI
-import org.kodein.di.bind
-import org.kodein.di.instance
-import org.kodein.di.singleton
+import org.kodein.di.*
 import retrofit2.Retrofit
 
 private lateinit var kodeinStored: DI
@@ -36,10 +33,10 @@ class MyApp : Application() {
             PreferencesUtils.getSharedPreferences(applicationContext)
         }
         bind<UserStorage>() with singleton { UserStorage() }
-        bind<Retrofit>()with singleton { ApiRest.getApi() }
+        bind<Retrofit>() with singleton { ApiRest.getApi() }
 
-        bind<CompositeDisposable>( )with singleton { CompositeDisposable() }
-        bind<ArticleRepo>() with singleton{
+        bind<CompositeDisposable>() with provider { CompositeDisposable() }
+        bind<ArticleRepo>() with singleton {
             ArticleRepo(
                 instance<Retrofit>().create(
                     ArticleService::class.java
@@ -47,7 +44,7 @@ class MyApp : Application() {
             )
         }
 
-        bind<BlogRepo>() with singleton{
+        bind<BlogRepo>() with singleton {
             BlogRepo(
                 instance<Retrofit>().create(
                     BlogService::class.java
@@ -55,7 +52,7 @@ class MyApp : Application() {
             )
         }
 
-        bind<ReportRepo>() with singleton{
+        bind<ReportRepo>() with singleton {
             ReportRepo(
                 instance<Retrofit>().create(
                     ReportService::class.java

@@ -7,28 +7,30 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
 import com.example.authorization.ui.base.BaseMvpActivity
-import com.example.authorization.ui.fragments.BookmarksFragment
-import com.example.authorization.ui.fragments.ExtendedNewsFragment
-import com.example.authorization.ui.fragments.HistoryFragment
-import com.example.authorization.ui.fragments.ProfileFragment
-import com.example.authorization.ui.home.HomeFragment
+import com.example.authorization.ui.fragments.bookmarks.BookmarksFragment
+import com.example.authorization.ui.fragments.extendednews.ExtendedNewsFragment
+import com.example.authorization.ui.fragments.history.HistoryFragment
+import com.example.authorization.ui.fragments.profile.ProfileFragment
+import com.example.authorization.ui.fragments.home.HomeFragment
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavTransactionOptions
 import kotlinx.android.synthetic.main.activity_account.*
-
 
 class AccountActivity : BaseMvpActivity(), AccountView {
 
     private val fragNavController = FragNavController(supportFragmentManager, R.id.vFlContainer)
     private var backPressed: Long = 0
 
-    private val fragments = listOf(
+    companion object{
+        private const val TIME: Int = 2000
+    }
+
+    private val fragments: List<BaseMvpFragment> = listOf(
         HomeFragment.newInstance(),
         BookmarksFragment.newInstance(),
         HistoryFragment.newInstance(),
         ProfileFragment.newInstance()
     )
-
 
     override fun onBackPressed() {
         if (fragNavController.isRootFragment) {
@@ -49,7 +51,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
 
     private fun setupNavigation(savedInstanceState: Bundle?) {
         fragNavController.fragmentHideStrategy = FragNavController.HIDE
-        fragNavController.rootFragments = fragments as? List<BaseMvpFragment>
+        fragNavController.rootFragments = fragments
         fragNavController.defaultTransactionOptions = FragNavTransactionOptions
             .newBuilder()
             .transition(FragmentTransaction.TRANSIT_NONE)
@@ -62,6 +64,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
         fragNavController.pushFragment(fragment)
     }
 
+    // MARK: Assistant functions
     private fun setupNavigationListeners() {
         vBnvBottomBar.setOnNavigationItemSelectedListener {
             when (it.itemId) {
@@ -86,13 +89,12 @@ class AccountActivity : BaseMvpActivity(), AccountView {
         }
     }
 
-    // MARK: Assistant functions
     private fun exitOrShowMessage() {
-        if (backPressed + 2000 > System.currentTimeMillis()) {
-            super.onBackPressed();
+        if (backPressed + TIME > System.currentTimeMillis()) {
+            super.onBackPressed()
         } else {
-            Toast.makeText(this, "Press once again to exit!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.exit), Toast.LENGTH_SHORT).show()
         }
-        backPressed = System.currentTimeMillis();
+        backPressed = System.currentTimeMillis()
     }
 }

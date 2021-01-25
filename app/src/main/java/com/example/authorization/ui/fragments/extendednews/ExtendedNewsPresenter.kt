@@ -1,4 +1,4 @@
-package com.example.authorization.ui.home
+package com.example.authorization.ui.fragments.extendednews
 
 import com.arellomobile.mvp.InjectViewState
 import com.example.authorization.MyApp
@@ -7,45 +7,34 @@ import com.example.authorization.net.repo.BlogRepo
 import com.example.authorization.net.repo.ReportRepo
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.base.BaseMvpPresenter
+import com.example.authorization.utils.transformations.MenuItem
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.kodein.di.instance
 
 @InjectViewState
-class HomePresenter() : BaseMvpPresenter<HomeView>() {
+class ExtendedNewsPresenter : BaseMvpPresenter<ExtendedNewsView>() {
 
-    private val blogRepo by MyApp.kodein.instance<BlogRepo>()
     private val articleRepo by MyApp.kodein.instance<ArticleRepo>()
+    private val blogRepo by MyApp.kodein.instance<BlogRepo>()
     private val reportRepo by MyApp.kodein.instance<ReportRepo>()
 
-    fun onCreate(itemClickObservable: Observable<ArticleResponse>) {
-        setNews()
-        initOnItemClickListener(itemClickObservable)
+    fun onCreate(newsId: String?, itemName:MenuItem) {
+        if (newsId != null) {
+            setNews(newsId, itemName)
+        }
     }
 
-    fun onSearchClicked(){
-        viewState.changeImage()
-        viewState.showForm()
-    }
+    private fun setNews(newsId: String, itemName: MenuItem = MenuItem.Article) {
 
-    fun onCrossClicked(){
-        viewState.changeImage()
-        viewState.showTitle()
-    }
+        val newsItem: Observable<ArticleResponse> = when (itemName) {
+            is MenuItem.Article -> articleRepo.getArticleById(newsId)
+            is MenuItem.Blog -> blogRepo.getBlogById(newsId)
+            is MenuItem.Report-> reportRepo.getReportById(newsId)
+        }
 
-    private fun initOnItemClickListener(itemClickObservable: Observable<ArticleResponse>) {
-        addDisposable(
-            itemClickObservable.subscribe({
-                viewState.goToArticleItem(it)
-            }, {
-
-            })
-        )
-    }
-
-    private fun setNews() {
-        addDisposable(articleRepo.getArticle()
+        addDisposable(newsItem
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -54,6 +43,5 @@ class HomePresenter() : BaseMvpPresenter<HomeView>() {
 
             }
             ))
-
     }
 }

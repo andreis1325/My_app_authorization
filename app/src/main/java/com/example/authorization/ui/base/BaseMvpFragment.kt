@@ -1,12 +1,15 @@
 package com.delivery.ui.base
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.ui.base.BaseMvpView
+import kotlinx.android.synthetic.main.fragment_home.*
 
 abstract class BaseMvpFragment : com.delivery.ui.base.MvpFragment(),
     BaseMvpView {
@@ -50,4 +53,16 @@ abstract class BaseMvpFragment : com.delivery.ui.base.MvpFragment(),
     }
 
     open fun scrollToTheTop() {}
+
+    open fun showKeyboard() {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.showSoftInput(vEtSearch, 0)
+    }
+
+    open fun closeKeyboard() {
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
 }

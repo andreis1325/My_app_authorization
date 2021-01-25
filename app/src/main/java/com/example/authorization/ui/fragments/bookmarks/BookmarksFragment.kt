@@ -1,7 +1,6 @@
-package com.example.authorization.ui.fragments
+package com.example.authorization.ui.fragments.bookmarks
 
 import android.view.View
-import androidx.core.content.ContextCompat
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
 

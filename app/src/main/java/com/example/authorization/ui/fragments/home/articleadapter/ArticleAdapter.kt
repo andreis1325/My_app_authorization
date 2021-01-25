@@ -1,4 +1,4 @@
-package com.example.authorization.ui.home.adapter
+package com.example.authorization.ui.fragments.home.articleadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,8 +9,9 @@ import com.example.authorization.ui.base.BaseViewHolder
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
+class ArticleAdapter(elements: MutableList<ArticleResponse> = mutableListOf()) :
+    BaseListAdapter<ArticleResponse>(elements) {
 
-class MyAdapter() : BaseListAdapter<ArticleResponse>() {
     private val itemClickSubject = PublishSubject.create<ArticleResponse>()
     val itemClickObservable: Observable<ArticleResponse> = itemClickSubject
 
@@ -18,7 +19,7 @@ class MyAdapter() : BaseListAdapter<ArticleResponse>() {
         parent: ViewGroup,
         viewType: Int
     ): BaseViewHolder<ArticleResponse> {
-        return ViewHolder(
+        return ArticleViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false),
             itemClickSubject
         )

@@ -22,7 +22,7 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         logInOrGoToAccount()
     }
 
-    private fun logInOrGoToAccount(){
+    private fun logInOrGoToAccount() {
         if (sharedPreference.isLoggedIn)
             viewState.goToAccount()
     }
@@ -39,8 +39,8 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if(userRepo.isRegistered(email)){
-            if(isKeepData)
+        if (userRepo.isRegistered(email)) {
+            if (isKeepData)
                 updateSharedPreference(email, password)
             viewState.goToAccount()
         } else
@@ -54,23 +54,23 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if(!email.isEmailValid()) {
+        if (!email.isEmailValid()) {
             viewState.showMsg(R.string.wrong_email)
             return
         }
 
-        if (password != confirmPassword){
+        if (password != confirmPassword) {
             viewState.showMsg(R.string.not_equal_passwords)
             return
         }
 
-        if(userRepo.isRegistered(email)){
+        if (userRepo.isRegistered(email)) {
             viewState.showMsg(R.string.wrong_data)
             return
         }
 
-            userRepo.addUser(email, password)
-            viewState.goToAccount()
+        userRepo.addUser(email, password)
+        viewState.goToAccount()
     }
 
     fun onSwitchedLogInClicked() {
@@ -81,13 +81,12 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         viewState.goToSignUpForm()
     }
 
-    fun onRecoverPassClicked(){
+    fun onRecoverPassClicked() {
         viewState.recoverPassword()
     }
 
-
     // MARK : Assistant methods
-    private fun updateSharedPreference(email: String, password: String){
+    private fun updateSharedPreference(email: String, password: String) {
         sharedPreference.userEmail = email
         sharedPreference.userPassword = password
         sharedPreference.isLoggedIn = true

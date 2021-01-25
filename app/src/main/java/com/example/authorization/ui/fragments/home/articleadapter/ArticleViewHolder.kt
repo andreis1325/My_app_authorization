@@ -1,20 +1,17 @@
-package com.example.authorization.ui.home.adapter
+package com.example.authorization.ui.fragments.home.articleadapter
 
 import android.text.TextUtils
 import android.view.View
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
+import android.view.ViewTreeObserver
 import com.bumptech.glide.Glide
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.base.BaseViewHolder
+import com.example.authorization.utils.extensions.generateDate
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.item_layout.view.*
-import java.text.SimpleDateFormat
-import java.util.*
 
-
-class ViewHolder(
-    view: View,
-    private val itemClickSubject: PublishSubject<ArticleResponse>
+class ArticleViewHolder(
+    view: View, var itemClickSubject: PublishSubject<ArticleResponse>
 ) : BaseViewHolder<ArticleResponse>(view) {
 
     override fun bind(model: ArticleResponse) {
@@ -23,7 +20,7 @@ class ViewHolder(
     }
 
     private fun initClickListener(articleResponse: ArticleResponse) {
-        setOnClickListener {
+        itemView.vCvItemNews.setOnClickListener {
             itemClickSubject.onNext(articleResponse)
         }
     }
@@ -36,12 +33,8 @@ class ViewHolder(
         setDate(model.publishedAt)
     }
 
-    private fun setDate(apiDate: String?){
-        val firstDate = apiDate!!.substring(0,10)
-        val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-        val date = formatter.parse(firstDate)
-        val desiredFormat = SimpleDateFormat("MMM dd, yyyy",Locale.ENGLISH ).format(date!!)
-        itemView.vTvTime.text = desiredFormat
+    private fun setDate(apiDate: String?) {
+        itemView.vTvTime.text = apiDate?.generateDate()
     }
 
     private fun setImage(imageUrl: String?) {
@@ -62,7 +55,7 @@ class ViewHolder(
 
     private fun setMaxLines() {
         itemView.vTvItemSummary.viewTreeObserver
-            .addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+            .addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     itemView.vTvItemSummary.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     val noOfLinesVisible: Int =

@@ -1,9 +1,8 @@
-package com.example.authorization.ui.fragments
+package com.example.authorization.ui.fragments.history
 
 import android.view.View
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
-
 
 class HistoryFragment: BaseMvpFragment(){
 

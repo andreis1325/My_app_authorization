@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface BlogService{
+interface BlogService {
 
     @GET("/api/v2/blogs")
     fun getBlogs(): Observable<ArrayList<ArticleResponse>>
@@ -14,5 +14,4 @@ interface BlogService{
     fun getBlogById(
         @Path("id") id: String
     ): Observable<ArticleResponse>
-
 }

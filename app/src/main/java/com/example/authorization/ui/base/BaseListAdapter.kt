@@ -22,9 +22,9 @@ abstract class BaseListAdapter<T>(
         if (listener != null) {
             holder.setOnClickListener { listener.onItemClick(item, holder.itemView) }
         }
-//        if (colourAlternateItems) {
-//            holder.setPositionInList(position)
-//        }
+        if (colourAlternateItems) {
+            holder.setPositionInList(position)
+        }
     }
 
     override fun onViewRecycled(holder: BaseViewHolder<in T>) {

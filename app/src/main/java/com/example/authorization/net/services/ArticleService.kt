@@ -5,18 +5,18 @@ import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
 
-interface ArticleService{
+interface ArticleService {
 
     @GET("/api/v2/articles")
     fun getArticles(): Observable<ArrayList<ArticleResponse>>
 
     @GET("/api/v2/articles/{id}")
-    fun getArticlesById(
+    fun getArticleById(
         @Path("id") id: String
     ): Observable<ArticleResponse>
 
     @GET("/api/v2/articles/launch/{id}")
     fun getArticlesLinkedByLaunch(
-        @Path("id") id:String
-    ):Observable<ArticleResponse>
+        @Path("id") id: String
+    ): Observable<ArticleResponse>
 }

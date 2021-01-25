@@ -6,8 +6,8 @@ import io.reactivex.Observable
 
 class BlogRepo(private val api: BlogService){
 
-    fun getBlog(): Observable<ArrayList<ArticleResponse>> = api.getBlogs()
+    fun getBlogs(): Observable<ArrayList<ArticleResponse>> = api.getBlogs()
 
-    fun getArticlesById(id: String): Observable<ArticleResponse> = api.getBlogById(id)
+    fun getBlogById(id: String): Observable<ArticleResponse> = api.getBlogById(id)
 
 }
