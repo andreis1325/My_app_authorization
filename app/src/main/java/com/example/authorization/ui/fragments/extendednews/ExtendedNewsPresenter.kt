@@ -27,7 +27,6 @@ class ExtendedNewsPresenter : BaseMvpPresenter<ExtendedNewsView>() {
     }
 
     private fun setNews(newsId: String, itemName: MenuItem = MenuItem.Article) {
-
         val newsItem: Observable<ArticleResponse> = when (itemName) {
             is MenuItem.Article -> articleRepo.getArticleById(newsId)
             is MenuItem.Blog -> blogRepo.getBlogById(newsId)

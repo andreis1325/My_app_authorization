@@ -8,6 +8,8 @@ interface HomeView : BaseMvpView {
     fun changeImage()
     fun showForm()
     fun showTitle()
-    fun setNews(it: ArrayList<ArticleResponse>)
     fun goToArticleItem(it: String?, itemName: MenuItem)
+    fun updateArticles(newsItemsList: List<ArrayList<ArticleResponse>>)
+    fun linkViewPagerAndTabLayout()
+    fun setTitleNames()
 }

@@ -85,7 +85,7 @@ class ExtendedNewsFragment : BaseMvpFragment(), ExtendedNewsView {
         Glide.with(this)
             .load(imageUrl)
             .centerCrop()
-            .placeholder(R.drawable.fox)
+            .error(R.drawable.fox)
             .into(vIvExtendedNewsImage)
     }
 

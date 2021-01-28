@@ -20,6 +20,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
 
     private val fragNavController = FragNavController(supportFragmentManager, R.id.vFlContainer)
     private var backPressed: Long = 0
+    private var isClickBlocked = false
 
     companion object{
         private const val TIME: Int = 2000
@@ -33,6 +34,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     )
 
     override fun onBackPressed() {
+        isClickBlocked = false
         if (fragNavController.isRootFragment) {
             exitOrShowMessage()
         } else
@@ -61,7 +63,10 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     }
 
     fun goToItemNews(fragment: ExtendedNewsFragment) {
-        fragNavController.pushFragment(fragment)
+
+        if(!isClickBlocked)
+            fragNavController.pushFragment(fragment)
+        isClickBlocked = true
     }
 
     // MARK: Assistant functions

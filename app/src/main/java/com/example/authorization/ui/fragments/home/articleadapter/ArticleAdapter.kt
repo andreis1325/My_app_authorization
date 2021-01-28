@@ -6,14 +6,13 @@ import com.example.authorization.R
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.base.BaseListAdapter
 import com.example.authorization.ui.base.BaseViewHolder
-import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 
-class ArticleAdapter(elements: MutableList<ArticleResponse> = mutableListOf()) :
+class ArticleAdapter(
+    elements: MutableList<ArticleResponse> = mutableListOf(),
+    var itemClickSubject: PublishSubject<ArticleResponse>
+) :
     BaseListAdapter<ArticleResponse>(elements) {
-
-    private val itemClickSubject = PublishSubject.create<ArticleResponse>()
-    val itemClickObservable: Observable<ArticleResponse> = itemClickSubject
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

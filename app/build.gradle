@@ -76,10 +76,9 @@ dependencies {
     kapt "com.arello-mobile:moxy-compiler:1.5.6"
 
     //Rx
-    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
 
     // reactive
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
     implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
     implementation "com.jakewharton.rxbinding3:rxbinding:$rxViewBindingVersion"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
@@ -95,4 +94,7 @@ dependencies {
 
     // fragNav
     implementation 'com.ncapdevi:frag-nav:3.2.0'
+
+    //viewPager
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
 }

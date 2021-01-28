@@ -1,16 +1,18 @@
 package com.example.authorization.ui.fragments.home
 
-import android.text.Editable
 import com.arellomobile.mvp.InjectViewState
 import com.example.authorization.MyApp
 import com.example.authorization.net.repo.ArticleRepo
 import com.example.authorization.net.repo.BlogRepo
 import com.example.authorization.net.repo.ReportRepo
+import com.example.authorization.net.responses.ArticleItemsWithBlogAndReport
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.base.BaseMvpPresenter
 import com.example.authorization.utils.transformations.MenuItem
+import com.example.authorization.utils.transformations.MenuItem.Article
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
 import org.kodein.di.instance
 import java.util.*
@@ -22,12 +24,24 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
     private val blogRepo by MyApp.kodein.instance<BlogRepo>()
     private val articleRepo by MyApp.kodein.instance<ArticleRepo>()
     private val reportRepo by MyApp.kodein.instance<ReportRepo>()
-    private var newsItems = ArrayList<ArticleResponse>()
-    private lateinit var itemName: MenuItem
+    private lateinit var newsItemsList: ArrayList<ArrayList<ArticleResponse>>
+    private var currentItemName: MenuItem = Article
+    private var currentShowingPosition: Int = 0
 
     fun onCreate(itemClickObservable: Observable<ArticleResponse>) {
-        setNews(getNews())
         initOnItemClickListener(itemClickObservable)
+        loadDataAndUpdateUI()
+        viewState.setTitleNames()
+        viewState.linkViewPagerAndTabLayout()
+    }
+
+    fun onPageChanged(position: Int) {
+        currentShowingPosition = position
+        when (position) {
+            0 -> currentItemName = Article
+            1 -> currentItemName = MenuItem.Blog
+            2 -> currentItemName = MenuItem.Report
+        }
     }
 
     fun onSearchClicked() {
@@ -40,61 +54,57 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         viewState.showTitle()
     }
 
-    fun findSearchedItems(text: String): List<ArticleResponse> {
-        val searchText = text.toLowerCase(Locale.ROOT)
-        val searchedItems = ArrayList<ArticleResponse>()
+    fun onTextChanged(text: CharSequence?) {
 
-        for (item in newsItems) {
-            if (item.title?.toLowerCase(Locale.ROOT)?.indexOf(searchText) != -1)
-                searchedItems.add(item)
+        val searchText = text.toString().toLowerCase(Locale.ROOT)
+        val searchedItems: ArrayList<ArrayList<ArticleResponse>> = arrayListOf()
+
+        for (index in 0 until newsItemsList.size) {
+            if (index != currentShowingPosition)
+                searchedItems.add(newsItemsList[index])
+            else
+                searchedItems.add(findSearchedItems(searchText))
         }
-        return searchedItems
+        viewState.updateArticles(searchedItems)
     }
 
     // MARK: Assistant function
+    private fun findSearchedItems(searchText: String):ArrayList<ArticleResponse> {
+        val temp: ArrayList<ArticleResponse> = arrayListOf()
+        for (item in newsItemsList[currentShowingPosition]) {
+            if (item.title?.toLowerCase(Locale.ROOT)!!.contains(searchText))
+                temp.add(item)
+        }
+        return temp
+    }
+
     private fun initOnItemClickListener(itemClickObservable: Observable<ArticleResponse>) {
         addDisposable(
             itemClickObservable.subscribe {
-                viewState.goToArticleItem(it.id, itemName)
+                viewState.goToArticleItem(it.id, currentItemName)
             }
         )
     }
 
-    fun onTubSwitched(itemName: MenuItem ){
-        setNews(getNews(itemName))
-    }
+    private fun loadDataAndUpdateUI() {
+        val articleItems = articleRepo.getArticles()
+        val blogItems = blogRepo.getBlogs()
+        val reportItems = reportRepo.getReports()
 
-    private fun getNews(itemName: MenuItem = MenuItem.Article): Observable<ArrayList<ArticleResponse>> {
-
-        lateinit var articleResponse: Observable<ArrayList<ArticleResponse>>
-        when (itemName) {
-            is MenuItem.Article -> {
-                articleResponse = articleRepo.getArticles()
-                this.itemName = MenuItem.Article
-            }
-            is MenuItem.Blog -> {
-                articleResponse = blogRepo.getBlogs()
-                this.itemName = MenuItem.Blog
-            }
-            is MenuItem.Report -> {
-                articleResponse = reportRepo.getReports()
-                this.itemName = MenuItem.Report
-            }
-        }
-        return articleResponse
-    }
-
-        private fun setNews(articleResponse: Observable<ArrayList<ArticleResponse>>){
-            addDisposable(articleResponse
+        addDisposable(
+            Observable.zip(
+                articleItems, blogItems, reportItems,
+                Function3<ArrayList<ArticleResponse>, ArrayList<ArticleResponse>, ArrayList<ArticleResponse>, ArticleItemsWithBlogAndReport> { articleItems, blogItems, reportItems ->
+                    ArticleItemsWithBlogAndReport(articleItems, blogItems, reportItems)
+                }
+            )
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    newsItems.clear()
-                    newsItems.addAll(it)
-                    viewState.setNews(it)
+                    newsItemsList = arrayListOf(it.articleItems, it.blogItems, it.reportItems)
+                    viewState.updateArticles(newsItemsList)
                 }, {
-
-                }
-                ))
-        }
+                })
+        )
+    }
 }

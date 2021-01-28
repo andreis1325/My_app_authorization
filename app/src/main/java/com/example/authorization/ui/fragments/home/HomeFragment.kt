@@ -1,67 +1,71 @@
 package com.example.authorization.ui.fragments.home
 
 import android.view.View
+import androidx.viewpager2.widget.ViewPager2
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.fragments.extendednews.ExtendedNewsFragment
-import com.example.authorization.ui.fragments.home.articleadapter.ArticleAdapter
+import com.example.authorization.ui.fragments.home.viewpageradapter.MenuTitleAdapter
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
-import com.example.authorization.utils.expanded.SimpleOnTabListener
 import com.example.authorization.utils.expanded.SimpleTextWatcher
 import com.example.authorization.utils.transformations.MenuItem
-import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlin.collections.ArrayList
 
-class HomeFragment : BaseMvpFragment(),
-    HomeView {
+class HomeFragment : BaseMvpFragment(), HomeView {
 
     @InjectPresenter
     lateinit var homePresenter: HomePresenter
 
-    private lateinit var articleAdapter: ArticleAdapter
+    private lateinit var menuTitleAdapter: MenuTitleAdapter
 
     companion object {
         fun newInstance(): HomeFragment {
             return HomeFragment()
         }
+
+        var titleNames: ArrayList<String> = arrayListOf()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun onViewCreated(view: View) {
-        initAdapter()
-        homePresenter.onCreate(articleAdapter.itemClickObservable)
+        initViewPagerAdapter()
         initOnClickedListener()
+        homePresenter.onCreate(menuTitleAdapter.itemClickObservable)
+    }
+
+    private fun initViewPagerAdapter() {
+        menuTitleAdapter = MenuTitleAdapter()
+        vVpContainer.adapter = menuTitleAdapter
     }
 
     private fun initOnClickedListener() {
         vIvSearch.setOnClickListener {
             homePresenter.onSearchClicked()
         }
+
         vIvCross.setOnClickListener {
             homePresenter.onCrossClicked()
         }
 
-        vTlMenu.addOnTabSelectedListener(object : SimpleOnTabListener() {
-
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.text.toString()){
-                    getString(R.string.first_menu_item) -> homePresenter.onTubSwitched(MenuItem.Article)
-                    getString(R.string.second_menu_item) -> homePresenter.onTubSwitched(MenuItem.Blog)
-                    getString(R.string.third_menu_item) -> homePresenter.onTubSwitched(MenuItem.Report)
-                }
+        vVpContainer.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                homePresenter.onPageChanged(position)
             }
         })
-    }
 
-    private fun initAdapter() {
-        articleAdapter = ArticleAdapter()
-        vRvNews.adapter = articleAdapter
+        vEtSearch?.addTextChangedListener(object : SimpleTextWatcher() {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                homePresenter.onTextChanged(s)
+            }
+        }
+        )
     }
 
     // MARK: View implementation
@@ -75,16 +79,11 @@ class HomeFragment : BaseMvpFragment(),
         }
     }
 
-    override fun setNews(it: ArrayList<ArticleResponse>) {
-        articleAdapter.setItems(it)
-    }
-
     override fun showForm() {
         vTvNews?.gone()
         vEtSearch?.visible()
         vEtSearch.requestFocus()
         showKeyboard()
-        textChangeListener()
     }
 
     override fun showTitle() {
@@ -98,14 +97,22 @@ class HomeFragment : BaseMvpFragment(),
         (activity as? AccountActivity)?.goToItemNews(ExtendedNewsFragment.newInstance(id, itemName))
     }
 
-    // MARK: Assistant functions
-    private fun textChangeListener() {
-        vEtSearch?.addTextChangedListener(object : SimpleTextWatcher() {
+    override fun updateArticles(newsItemsList: List<ArrayList<ArticleResponse>>) {
+        menuTitleAdapter.setItems(newsItemsList)
+    }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                articleAdapter.setItems(homePresenter.findSearchedItems(vEtSearch.text.toString()))
-            }
-        }
+    override fun linkViewPagerAndTabLayout() {
+        TabLayoutMediator(vTlMenu, vVpContainer) { tab, position ->
+            tab.text = titleNames[position]
+        }.attach()
+    }
+
+
+    override fun setTitleNames() {
+        titleNames = arrayListOf(
+            getString(R.string.first_menu_item),
+            getString(R.string.second_menu_item),
+            getString(R.string.third_menu_item)
         )
     }
 }

@@ -17,3 +17,9 @@ class Provider(
     var id: String? = null,
     var provider: String? = null
 )
+
+class ArticleItemsWithBlogAndReport(
+    var articleItems: ArrayList<ArticleResponse>,
+    var blogItems: ArrayList<ArticleResponse>,
+    var reportItems:ArrayList<ArticleResponse>
+)
