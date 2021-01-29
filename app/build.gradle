@@ -95,6 +95,9 @@ dependencies {
     // fragNav
     implementation 'com.ncapdevi:frag-nav:3.2.0'
 
-    //viewPager
+    // viewPager
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    // refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

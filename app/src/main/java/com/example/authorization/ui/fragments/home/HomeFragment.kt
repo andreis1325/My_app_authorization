@@ -14,7 +14,9 @@ import com.example.authorization.utils.extensions.visible
 import com.example.authorization.utils.expanded.SimpleTextWatcher
 import com.example.authorization.utils.transformations.MenuItem
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.fragment_history.*
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.vSrlRefreshNews
 import kotlin.collections.ArrayList
 
 class HomeFragment : BaseMvpFragment(), HomeView {
@@ -24,19 +26,19 @@ class HomeFragment : BaseMvpFragment(), HomeView {
 
     private lateinit var menuTitleAdapter: MenuTitleAdapter
 
+    private var titleNames: ArrayList<String> = arrayListOf()
+
     companion object {
         fun newInstance(): HomeFragment {
             return HomeFragment()
         }
-
-        var titleNames: ArrayList<String> = arrayListOf()
     }
 
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun onViewCreated(view: View) {
         initViewPagerAdapter()
-        initOnClickedListener()
+        initOnClickListeners()
         homePresenter.onCreate(menuTitleAdapter.itemClickObservable)
     }
 
@@ -45,7 +47,7 @@ class HomeFragment : BaseMvpFragment(), HomeView {
         vVpContainer.adapter = menuTitleAdapter
     }
 
-    private fun initOnClickedListener() {
+    private fun initOnClickListeners() {
         vIvSearch.setOnClickListener {
             homePresenter.onSearchClicked()
         }
@@ -66,6 +68,9 @@ class HomeFragment : BaseMvpFragment(), HomeView {
             }
         }
         )
+        vSrlRefreshNews.setOnRefreshListener {
+            homePresenter.onRefreshNews()
+        }
     }
 
     // MARK: View implementation
@@ -77,6 +82,14 @@ class HomeFragment : BaseMvpFragment(), HomeView {
             vIvSearch.gone()
             vIvCross.visible()
         }
+    }
+
+    override fun showRefreshAnimation(){
+        vSrlRefreshNews.isRefreshing = true
+    }
+
+    override fun hideRefreshAnimation(){
+        vSrlRefreshNews.isRefreshing = false
     }
 
     override fun showForm() {

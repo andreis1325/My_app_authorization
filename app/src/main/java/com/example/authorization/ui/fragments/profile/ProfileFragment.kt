@@ -1,9 +1,11 @@
 package com.example.authorization.ui.fragments.profile
 
+import android.content.Intent
 import android.view.View
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
+import com.example.authorization.ui.login.LoginActivity
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment: BaseMvpFragment(), ProfileView{
@@ -23,7 +25,6 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
 
     override fun onViewCreated(view: View) {
         initOnClickListeners()
-
     }
 
     private fun initOnClickListeners(){
@@ -32,7 +33,8 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
         }
     }
 
-    override fun closeActivity() {
+    override fun switchToLoginActivity() {
         activity?.finish()
+        startActivity(Intent(context, LoginActivity::class.java))
     }
 }

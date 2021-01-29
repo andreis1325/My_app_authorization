@@ -152,6 +152,7 @@
             android:layout_marginRight="@dimen/dp_16">
 
             <TextView
+                android:id="@+id/vTvKeepLoggedIn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/dp_32"
@@ -170,7 +171,7 @@
 
                 <com.example.authorization.utils.view.MyCheckBox
                     android:id="@+id/vMcbKeepLoggedIn"
-                    android:layout_width="30dp"
+                    android:layout_width="21dp"
                     android:layout_height="30dp"
                     android:layout_gravity="center_horizontal"
                     app:isKeepLoggedIn="false" />

@@ -31,11 +31,16 @@ class MyCheckBox(context: Context, attrs: AttributeSet) : LinearLayout(context, 
         }
     }
 
-    fun setOnKeepLoggedInClickListener() {
+    private fun setOnKeepLoggedInClickListener() {
+
         vIvKeepLogIn.setOnClickListener {
-            isKeepLoggedIn = !isKeepLoggedIn
-            updateImage()
+            changeIsKeepLogIn()
         }
+    }
+
+    fun changeIsKeepLogIn(){
+        isKeepLoggedIn = !isKeepLoggedIn
+        updateImage()
     }
 
     private fun updateImage(){

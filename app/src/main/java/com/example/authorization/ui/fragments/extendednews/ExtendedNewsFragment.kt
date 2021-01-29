@@ -11,6 +11,7 @@ import com.example.authorization.R
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.utils.extensions.generateDate
+import com.example.authorization.utils.extensions.visible
 import com.example.authorization.utils.transformations.MenuItem
 import kotlinx.android.synthetic.main.fragment_extendend_news.*
 
@@ -54,12 +55,12 @@ class ExtendedNewsFragment : BaseMvpFragment(), ExtendedNewsView {
 
     //MARK: View implementation
     override fun setNews(it: ArticleResponse) {
+        vSvExtendedNews.visible()
         setImage(it.imageUrl)
         setTitle(it.title)
         setDate(it.publishedAt)
         setSummary(it.summary)
         setSite(it.url)
-
     }
 
     //MARK: Assistant functions

@@ -14,7 +14,7 @@ class ProfilePresenter : BaseMvpPresenter<ProfileView>() {
 
     fun exit(){
         authData.isLoggedIn = false
-        viewState.closeActivity()
+        viewState.switchToLoginActivity()
     }
 
 }

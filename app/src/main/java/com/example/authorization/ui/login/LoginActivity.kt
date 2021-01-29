@@ -59,6 +59,9 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vTvRecoverPass.setOnClickListener {
             loginPresenter.onRecoverPassClicked()
         }
+        vTvKeepLoggedIn.setOnClickListener{
+            loginPresenter.onKeepLogInClicked()
+        }
     }
 
     private fun showImageLogo() {
@@ -82,7 +85,11 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vTvLogo.text = spannableString
     }
 
-    /* MARK:  View Implementation */
+    // MARK: View Implementation
+    override fun saveOrNotAuthData(){
+        vMcbKeepLoggedIn.changeIsKeepLogIn()
+    }
+
     override fun showMsg(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
@@ -107,10 +114,6 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vFlLogIn.gone()
         vFlSignUp.visible()
         vLlRepeatPass.visible()
-    }
-
-    override fun keepLoggedIn() {
-        vMcbKeepLoggedIn.setOnKeepLoggedInClickListener()
     }
 
     override fun recoverPassword() {

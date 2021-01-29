@@ -12,4 +12,6 @@ interface HomeView : BaseMvpView {
     fun updateArticles(newsItemsList: List<ArrayList<ArticleResponse>>)
     fun linkViewPagerAndTabLayout()
     fun setTitleNames()
+    fun showRefreshAnimation()
+    fun hideRefreshAnimation()
 }

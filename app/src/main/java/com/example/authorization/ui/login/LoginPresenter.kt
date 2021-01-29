@@ -47,6 +47,10 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             viewState.showMsg(R.string.wrong_data)
     }
 
+    fun onKeepLogInClicked(){
+        viewState.saveOrNotAuthData()
+    }
+
     fun doSignUp(email: String, password: String, confirmPassword: String) {
 
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
