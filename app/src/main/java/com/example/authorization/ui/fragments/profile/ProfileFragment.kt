@@ -34,7 +34,7 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
     }
 
     override fun switchToLoginActivity() {
-        activity?.finish()
         startActivity(Intent(context, LoginActivity::class.java))
+        activity?.finish()
     }
 }

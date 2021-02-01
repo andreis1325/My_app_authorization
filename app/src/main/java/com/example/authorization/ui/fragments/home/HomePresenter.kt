@@ -32,7 +32,7 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
     fun onCreate(itemClickObservable: Observable<ArticleResponse>) {
         initOnItemClickListener(itemClickObservable)
         loadDataAndUpdateUI()
-        setSomeLogic()
+        setTitleNamesAndLinkViewPagerAndTabLayout()
 
     }
 
@@ -66,7 +66,7 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         )
     }
 
-    private fun setSomeLogic(){
+    private fun setTitleNamesAndLinkViewPagerAndTabLayout(){
         viewState.setTitleNames()
         viewState.linkViewPagerAndTabLayout()
     }
@@ -113,13 +113,13 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
 
     // MARK: Assistant function
     private fun findSearchedItems(searchText: String): ArrayList<ArticleResponse> {
-        val temp: ArrayList<ArticleResponse> = arrayListOf()
+        val searchedNewsItems: ArrayList<ArticleResponse> = arrayListOf()
 
         newsItemsList[currentShowingPosition].forEach { item ->
             if (item.title?.contains(searchText, true) == true)
-                temp.add(item)
+                searchedNewsItems.add(item)
         }
 
-        return temp
+        return searchedNewsItems
     }
 }

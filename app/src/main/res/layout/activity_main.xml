@@ -171,8 +171,8 @@
 
                 <com.example.authorization.utils.view.MyCheckBox
                     android:id="@+id/vMcbKeepLoggedIn"
-                    android:layout_width="21dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
                     android:layout_gravity="center_horizontal"
                     app:isKeepLoggedIn="false" />
 
