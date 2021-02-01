@@ -16,6 +16,7 @@ import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.ui.recoverpassword.RecoverPassword
 import com.example.authorization.utils.extensions.gone
+import com.example.authorization.utils.extensions.setImage
 import com.example.authorization.utils.extensions.visible
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.activity_main.*
@@ -38,14 +39,28 @@ class LoginActivity : BaseMvpActivity(), LoginView {
 
         loginPresenter.onCreate()
         showTextLogo()
-        showImageLogo()
+        vIvLogo.setImage(R.drawable.fox)
         initOnClickListeners()
+    }
+
+    private fun showTextLogo() {
+        val spannableString = SpannableString(getString(R.string.logo))
+        val foregroundSpanFirst = ForegroundColorSpan(Color.WHITE)
+        val foregroundSpanSecond = ForegroundColorSpan(ContextCompat.getColor(this, R.color.orange))
+        spannableString.setSpan(foregroundSpanFirst, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            foregroundSpanSecond,
+            3,
+            spannableString.length,
+            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        vTvLogo.text = spannableString
     }
 
     private fun initOnClickListeners() {
 
         vFlLogInGoogle.setOnClickListener {
-            loginPresenter.signIn(this)
+            loginPresenter.signInGoogle(this)
         }
 
         vFlSignUp.setOnClickListener {
@@ -74,28 +89,6 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vTvKeepLoggedIn.setOnClickListener {
             loginPresenter.onKeepLogInClicked()
         }
-    }
-
-    //MARK: Assistant functions
-    private fun showImageLogo() {
-        Glide.with(this)
-            .load(R.drawable.fox)
-            .placeholder(R.drawable.fox)
-            .into(vIvLogo)
-    }
-
-    private fun showTextLogo() {
-        val spannableString = SpannableString(getString(R.string.logo))
-        val foregroundSpanFirst = ForegroundColorSpan(Color.WHITE)
-        val foregroundSpanSecond = ForegroundColorSpan(ContextCompat.getColor(this, R.color.orange))
-        spannableString.setSpan(foregroundSpanFirst, 0, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(
-            foregroundSpanSecond,
-            3,
-            spannableString.length,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-        vTvLogo.text = spannableString
     }
 
     // MARK: View Implementation

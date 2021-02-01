@@ -7,9 +7,8 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
 import com.delivery.ui.base.BaseMvpFragment
 import com.example.authorization.R
-import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.login.LoginActivity
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.example.authorization.utils.extensions.setImage
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
@@ -30,10 +29,8 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
 
     override fun onViewCreated(view: View) {
         initOnClickListeners()
-        profilePresenter.onCreate(context)
+        profilePresenter.onCreate()
     }
-
-
 
     private fun initOnClickListeners(){
         vBExit.setOnClickListener{
@@ -42,20 +39,16 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
         }
     }
 
-    //MARK: View implementation
-    override fun setGoogleData(gEmail: String?, gName: String?, gId: String?, gImage: Uri?) {
-        vTvGoogleEmail.text = gEmail
-        vTvGoogleName.text = gName
-        vTvGoogleId.text = gId
-
-        Glide.with(this)
-            .load(gImage)
-            .placeholder(R.drawable.fox)
-            .into(vTvGooglePhoto)
-    }
-
     override fun switchToLoginActivity() {
         startActivity(Intent(context, LoginActivity::class.java))
         activity?.finish()
     }
+
+    override fun setGoogleData(gEmail: String?, gName: String?, gId: String?, gImage: Uri?) {
+        vTvGoogleEmail.text = gEmail
+        vTvGoogleName.text = gName
+        vTvGoogleId.text = gId
+        vTvGooglePhoto.setImage(gImage)
+    }
+
 }

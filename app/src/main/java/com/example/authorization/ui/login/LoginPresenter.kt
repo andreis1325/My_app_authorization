@@ -58,13 +58,28 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             viewState.showMsg(R.string.wrong_data)
     }
 
+    private fun updateSharedPreference(email: String, password: String) {
+        keepAuthData.userEmail = email
+        keepAuthData.userPassword = password
+        keepAuthData.isLoggedIn = true
+    }
+
     fun onKeepLogInClicked() {
         viewState.saveOrNotAuthData()
     }
 
-    fun signIn(context: LoginActivity) {
+    fun signInGoogle(context: LoginActivity) {
         initVariable(context)
         context.startActivityForResult(mGoogleSignInClient.signInIntent, RC_SIGN_IN)
+    }
+
+    private fun initVariable(context: LoginActivity) {
+        val googleSignInClient = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(context, googleSignInClient)
+        mGoogleSignInClient.signOut()
+
     }
 
     fun doSignUp(email: String, password: String, confirmPassword: String) {
@@ -112,28 +127,19 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         }
     }
 
-    // MARK : Assistant methods
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
+
             val account = completedTask.getResult(ApiException::class.java)
+
             if (account != null){
                 setGoogleAuthData(account)
                 viewState.goToAccount()
             }
 
-
         } catch (e: ApiException) {
             Log.w("TAG", "signInResult:failed code=" + e.statusCode)
         }
-    }
-
-    private fun initVariable(context: LoginActivity) {
-        val googleSignInClient = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(context, googleSignInClient)
-        mGoogleSignInClient.signOut()
-
     }
 
     private fun setGoogleAuthData(account: GoogleSignInAccount) {
@@ -142,11 +148,5 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         keepAuthData.googleName = account.displayName
         keepAuthData.googleId = account.id
         keepAuthData.googleImage= account.photoUrl.toString()
-    }
-
-    private fun updateSharedPreference(email: String, password: String) {
-        keepAuthData.userEmail = email
-        keepAuthData.userPassword = password
-        keepAuthData.isLoggedIn = true
     }
 }

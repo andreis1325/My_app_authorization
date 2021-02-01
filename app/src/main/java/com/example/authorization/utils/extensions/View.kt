@@ -1,6 +1,10 @@
 package com.example.authorization.utils.extensions
 
+import android.net.Uri
 import android.view.View
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.example.authorization.R
 import io.realm.Realm
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,6 +25,30 @@ fun Realm.execute(block: (realm: Realm) -> Unit) {
             block(realm)
         }
     }
+}
+
+fun ImageView.setImage(gImage: Uri?) {
+    Glide.with(this)
+        .load(gImage)
+        .centerCrop()
+        .error(R.drawable.fox)
+        .into(this)
+}
+
+fun ImageView.setImage(image: String?) {
+    Glide.with(this)
+        .load(image)
+        .centerCrop()
+        .error(R.drawable.fox)
+        .into(this)
+}
+
+fun ImageView.setImage(image: Int?) {
+    Glide.with(this)
+        .load(image)
+        .centerCrop()
+        .error(R.drawable.fox)
+        .into(this)
 }
 
 fun String.generateDate(): String {
