@@ -24,6 +24,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -49,6 +50,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -73,6 +75,29 @@ dependencies {
     implementation "com.arello-mobile:moxy-app-compat:1.5.6"
     kapt "com.arello-mobile:moxy-compiler:1.5.6"
 
-    // Rx
-    implementation "io.reactivex.rxjava2:rxjava:2.1.8"
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rxjava2Version"
+
+    // reactive
+    implementation "io.reactivex.rxjava2:rxandroid:$rxandroidVersion"
+    implementation "com.jakewharton.rxbinding3:rxbinding:$rxViewBindingVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    ///Net
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$http3logginInterceptor"
+    implementation "com.squareup.okhttp3:okhttp:$http3Version"
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
+
+    // fragNav
+    implementation 'com.ncapdevi:frag-nav:3.2.0'
+
+    // viewPager
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    // refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 }

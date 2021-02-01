@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com.printique.utils.view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
-    android:background="@color/bg">
+    android:background="@color/bg"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,27 +15,23 @@
         android:orientation="vertical"
         android:padding="@dimen/dp_16">
 
-
         <ImageView
             android:id="@+id/vIvLogo"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_150"
             android:layout_gravity="center" />
 
-
-
-            <TextView
-                android:id="@+id/vTvLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_16"
-                android:fontFamily="@font/font_logo"
-                android:text="@string/logo"
-                android:textColor="@color/white"
-                android:textSize="42sp"
-                android:textStyle="bold"/>
-
+        <TextView
+            android:id="@+id/vTvLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_16"
+            android:fontFamily="@font/font_logo"
+            android:text="@string/logo"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_42"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,31 +40,25 @@
             android:fontFamily="@font/preamble_font"
             android:text="@string/preamble"
             android:textColor="@color/white"
-            android:textSize="13sp">
-
-
-        </TextView>
+            android:textSize="@dimen/sp_13"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/grey">
-
-        </View>
-
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginTop="@dimen/dp_24"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:background="@color/grey" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="@dimen/dp_16"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/vTvLogIn"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:text="@string/log_in"
                 android:textColor="@color/orange">
 
@@ -77,8 +67,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="@dimen/dp_16"
+                android:paddingRight="@dimen/dp_16"
                 android:text="@string/or"
                 android:textColor="@color/white">
 
@@ -89,173 +79,114 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sign_up"
-                android:textColor="@color/white">
-
-            </TextView>
+                android:textColor="@color/white" />
 
         </LinearLayout>
 
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-
-        </FrameLayout>
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:background="@color/grey"
-            android:gravity="center"
-            android:orientation="horizontal">
-
+            style="@style/AuthField"
+            android:layout_margin="@dimen/dp_16">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/email">
-
-
-            </ImageView>
+                style="@style/AuthFieldImage"
+                android:background="@drawable/email" />
 
             <EditText
                 android:id="@+id/vEtEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
+                style="@style/AuthFieldEditText"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:textColorHint="@color/hint"
-                android:textSize="@dimen/sp_16" />
+                android:textColorHint="@color/hint" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@color/grey"
-            android:gravity="center"
-            android:orientation="horizontal">
-
+            style="@style/AuthField"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/password">
-
-
-            </ImageView>
+                style="@style/AuthFieldImage"
+                android:background="@drawable/password" />
 
             <EditText
                 android:id="@+id/vEtPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
+                style="@style/AuthFieldEditText"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-
-
-                android:textColorHint="@color/hint"
-                android:textSize="16sp" />
+                android:textColorHint="@color/hint" />
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/vLlRepeatPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
             android:background="@color/grey"
             android:gravity="center"
             android:orientation="horizontal"
-            tools:visibility="visible"
-            android:visibility="gone">
-
+            android:visibility="gone"
+            tools:visibility="visible">
 
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
-                android:background="@drawable/password">
-
-
-            </ImageView>
+                style="@style/AuthFieldImage"
+                android:background="@drawable/password" />
 
             <EditText
                 android:id="@+id/vEtConfirmPassword"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_weight="1"
-                android:backgroundTint="@android:color/transparent"
+                style="@style/AuthFieldEditText"
                 android:hint="@string/repeat_password"
                 android:inputType="textPassword"
-                android:textColorHint="@color/hint"
-                android:textSize="16sp" />
+                android:textColorHint="@color/hint" />
+
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/vLlKeepLogIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp">
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16">
 
             <TextView
+                android:id="@+id/vTvKeepLoggedIn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
+                android:layout_marginStart="@dimen/dp_32"
+                android:layout_marginLeft="@dimen/dp_32"
                 android:layout_weight="3"
                 android:fontFamily="@font/remember_data_font"
                 android:gravity="center_vertical"
                 android:text="@string/remember_data"
                 android:textColor="@color/hint"
-                android:textSize="16sp">
-
-            </TextView>
+                android:textSize="@dimen/sp_16" />
 
             <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                    <com.example.authorization.utils.view.MyCheckBox
-                        android:id="@+id/vMcbKeepLoggedIn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_gravity="center_horizontal"
-                        app:isKeepLoggedIn="false">
-
-                    </com.example.authorization.utils.view.MyCheckBox>
-
+                <com.example.authorization.utils.view.MyCheckBox
+                    android:id="@+id/vMcbKeepLoggedIn"
+                    android:layout_width="@dimen/dp_24"
+                    android:layout_height="@dimen/dp_24"
+                    android:layout_gravity="center_horizontal"
+                    app:isKeepLoggedIn="false" />
 
             </FrameLayout>
 
-
         </LinearLayout>
-
 
         <FrameLayout
             android:id="@+id/vFlLogIn"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_42"
+            android:layout_marginRight="@dimen/dp_16"
             android:background="@color/grey"
             android:clickable="true"
             android:focusable="true"
@@ -264,26 +195,26 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="1dp"
+                android:layout_margin="@dimen/dp_1"
                 android:background="@drawable/sign_in_button_selector">
 
                 <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_30"
                     android:layout_gravity="center"
-                    android:background="@drawable/key">
+                    android:background="@drawable/key" />
 
-                </ImageView>
             </FrameLayout>
+
         </FrameLayout>
 
         <FrameLayout
             android:id="@+id/vFlSignUp"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="42dp"
-            android:layout_marginRight="16dp"
+            android:layout_height="@dimen/dp_48"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_42"
+            android:layout_marginRight="@dimen/dp_16"
             android:background="@color/grey"
             android:clickable="true"
             android:focusable="true"
@@ -292,44 +223,41 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_margin="1.4dp"
+                android:layout_margin="@dimen/dp_1"
                 android:background="@drawable/sign_in_button_selector">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_height="@dimen/dp_30"
                     android:layout_gravity="center"
                     android:text="@string/sign_up"
                     android:textColor="@color/white"
-                    android:textSize="16sp">
+                    android:textSize="@dimen/sp_16" />
 
-                </TextView>
             </FrameLayout>
+
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginLeft="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_32"
+            android:layout_marginRight="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_8"
             android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginEnd="@dimen/dp_8"
+                android:layout_marginRight="@dimen/dp_8"
                 android:layout_weight="4"
                 android:gravity="end"
                 android:text="@string/forgot_password"
                 android:textColor="@color/hint"
-                android:textSize="14sp">
-
-
-            </TextView>
+                android:textSize="@dimen/sp_14"/>
 
             <TextView
                 android:id="@+id/vTvRecoverPass"
@@ -338,11 +266,7 @@
                 android:layout_weight="3"
                 android:text="@string/recover_password"
                 android:textColor="@color/white"
-                android:textSize="14sp">
-
-
-            </TextView>
-
+                android:textSize="@dimen/sp_14" />
         </LinearLayout>
 
     </LinearLayout>

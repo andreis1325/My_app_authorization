@@ -1,12 +1,10 @@
 package com.example.authorization.model
 
-import io.realm.RealmModel
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-
 open class UserModel(
-   @PrimaryKey
+    @PrimaryKey
     var email: String? = "",
     var password: String = ""
 ) : RealmObject()

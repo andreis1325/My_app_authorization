@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/vSvExtendedNews"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-16dp"
+            app:cardCornerRadius="@dimen/dp_16">
+
+            <ImageView
+                android:id="@+id/vIvExtendedNewsImage"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_300"
+                tools:background="@color/orange" />
+
+            <ImageView
+                android:id="@+id/vIvBack"
+                android:layout_width="@dimen/dp_24"
+                android:layout_height="@dimen/dp_24"
+                android:layout_marginStart="@dimen/dp_16"
+                android:layout_marginLeft="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_32"
+                android:background="@drawable/ic_back" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:layout_marginLeft="@dimen/dp_12"
+                android:layout_marginTop="@dimen/dp_260"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:background="@drawable/ic_clock" />
+
+                <TextView
+                    android:id="@+id/vTvExtendedNewsTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/dp_4"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_16"
+            android:background="@color/orange">
+
+
+            <TextView
+                android:id="@+id/vTvExtendedNewsTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_6"
+                android:layout_marginLeft="@dimen/dp_6"
+                android:background="@color/bg"
+                android:paddingStart="@dimen/dp_16"
+                android:paddingLeft="@dimen/dp_16"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold"
+                tools:ignore="RtlSymmetry" />
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/vTvExtendedNewsSummary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/dp_16"
+            android:paddingLeft="@dimen/dp_16"
+            android:paddingEnd="@dimen/dp_16"
+            android:paddingRight="@dimen/dp_16"
+            android:textColor="@color/blondText"
+            android:textSize="@dimen/sp_16" />
+
+        <Button
+            android:id="@+id/vBGoToSite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/dp_16"
+            android:background="@drawable/go_to_site_selector"
+            android:text="@string/go_to_site" />
+
+
+    </LinearLayout>
+
+</ScrollView>

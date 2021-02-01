@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_16">
+
+        <EditText
+            android:id="@+id/vEtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_44"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:hint="@string/search"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/vTvNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/news"
+            android:gravity="center_vertical"
+            android:text="@string/news"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_22"
+            android:visibility="visible" />
+
+        <ImageView
+            android:id="@+id/vIvSearch"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/search" />
+
+        <ImageView
+            android:id="@+id/vIvCross"
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:layout_marginTop="@dimen/dp_4"
+            android:layout_marginEnd="@dimen/dp_16"
+            android:layout_marginRight="@dimen/dp_16"
+            android:background="@drawable/ic_cross"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/vIvBell"
+            android:layout_width="@dimen/dp_28"
+            android:layout_height="@dimen/dp_28"
+            android:src="@drawable/bell" />
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/vTlMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_16"
+        android:layout_marginRight="@dimen/dp_16"
+        app:tabIndicatorHeight="@dimen/dp_6"
+        app:tabInlineLabel="false">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/vTiArticle"
+            style="@style/TabItem"
+            android:text="@string/first_menu_item" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/vTiBlog"
+            style="@style/TabItem"
+            android:text="@string/second_menu_item" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/vTiReport"
+            style="@style/TabItem"
+            android:text="@string/third_menu_item" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/vSrlRefreshNews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vVpContainer"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
