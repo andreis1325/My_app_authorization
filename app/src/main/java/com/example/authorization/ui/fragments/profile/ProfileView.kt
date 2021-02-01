@@ -5,10 +5,5 @@ import com.example.authorization.ui.base.BaseMvpView
 
 interface ProfileView : BaseMvpView {
     fun switchToLoginActivity()
-    fun setGoogleData(
-        gEmail: String?,
-        gName: String?,
-        gId: String?,
-        gImage: Uri?
-    )
+    fun setGoogleData(gEmail: String?, gName: String?, gId: String?, gImage: Uri?)
 }

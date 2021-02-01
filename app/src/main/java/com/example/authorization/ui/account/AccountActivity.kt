@@ -12,9 +12,6 @@ import com.example.authorization.ui.fragments.extendednews.ExtendedNewsFragment
 import com.example.authorization.ui.fragments.history.HistoryFragment
 import com.example.authorization.ui.fragments.home.HomeFragment
 import com.example.authorization.ui.fragments.profile.ProfileFragment
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavTransactionOptions
 import kotlinx.android.synthetic.main.activity_account.*
@@ -25,7 +22,6 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     private val fragNavController = FragNavController(supportFragmentManager, R.id.vFlContainer)
     private var backPressed: Long = 0
     private var isClickBlocked = false
-    lateinit var mGoogleSignInClient: GoogleSignInClient
 
     companion object {
         private const val TIME: Int = 2000
@@ -56,11 +52,6 @@ class AccountActivity : BaseMvpActivity(), AccountView {
         setupNavigationListeners()
 
     }
-
-    fun signOut() {
-        accountPresenter.signOutGoogle(this)
-    }
-
 
     private fun setupNavigation(savedInstanceState: Bundle?) {
         fragNavController.fragmentHideStrategy = FragNavController.HIDE

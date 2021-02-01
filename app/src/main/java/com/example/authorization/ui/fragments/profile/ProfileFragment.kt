@@ -10,7 +10,6 @@ import com.example.authorization.R
 import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.login.LoginActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 
@@ -18,7 +17,6 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
 
     @InjectPresenter
     lateinit var profilePresenter: ProfilePresenter
-    lateinit var mGoogleSignInClient: GoogleSignInClient
 
     companion object {
 
@@ -33,21 +31,9 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
     override fun onViewCreated(view: View) {
         initOnClickListeners()
         profilePresenter.onCreate(context)
-        setGoogleAuthData()
     }
 
-    private fun setGoogleAuthData() {
-        val acct = GoogleSignIn.getLastSignedInAccount(context)
 
-           vTvGoogleEmail.text = acct?.email
-            vTvGoogleName.text = acct?.displayName
-            vTvGoogleId.text = acct?.id
-
-            Glide.with(this)
-                .load(acct?.photoUrl)
-                .placeholder(R.drawable.fox)
-                .into(vTvGooglePhoto)
-    }
 
     private fun initOnClickListeners(){
         vBExit.setOnClickListener{
@@ -69,7 +55,6 @@ class ProfileFragment: BaseMvpFragment(), ProfileView{
     }
 
     override fun switchToLoginActivity() {
-        (activity as? AccountActivity)?.signOut()
         startActivity(Intent(context, LoginActivity::class.java))
         activity?.finish()
     }

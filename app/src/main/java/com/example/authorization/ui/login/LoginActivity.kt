@@ -36,7 +36,7 @@ class LoginActivity : BaseMvpActivity(), LoginView {
 
     override fun onCreateActivity(savedInstanceState: Bundle?) {
 
-        loginPresenter.onCreate(this)
+        loginPresenter.onCreate()
         showTextLogo()
         showImageLogo()
         initOnClickListeners()
@@ -44,8 +44,8 @@ class LoginActivity : BaseMvpActivity(), LoginView {
 
     private fun initOnClickListeners() {
 
-        vFlLogInGoogle.setOnClickListener() {
-            loginPresenter.signIn()
+        vFlLogInGoogle.setOnClickListener {
+            loginPresenter.signIn(this)
         }
 
         vFlSignUp.setOnClickListener {

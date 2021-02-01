@@ -3,13 +3,10 @@ package com.example.authorization.ui.login
 import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
-import androidx.core.app.ActivityCompat.startActivityForResult
 import com.arellomobile.mvp.InjectViewState
 import com.example.authorization.MyApp
 import com.example.authorization.R
-import com.example.authorization.model.isLoggedIn
-import com.example.authorization.model.userEmail
-import com.example.authorization.model.userPassword
+import com.example.authorization.model.*
 import com.example.authorization.net.repo.UserRepo
 import com.example.authorization.ui.base.BaseMvpPresenter
 import com.example.authorization.utils.extensions.isEmailValid
@@ -27,18 +24,13 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
     private val userRepo by MyApp.kodein.instance<UserRepo>()
     private val keepAuthData by MyApp.kodein.instance<SharedPreferences>()
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private var rcSignIn = 0
 
-    fun onCreate(context: LoginActivity) {
-        logInOrGoToAccount()
-        initVariable(context)
+    companion object {
+        private const val RC_SIGN_IN = 100
     }
 
-    private fun initVariable(context: LoginActivity) {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestEmail()
-            .build()
-        mGoogleSignInClient = GoogleSignIn.getClient(context, gso);
+    fun onCreate() {
+        logInOrGoToAccount()
     }
 
     private fun logInOrGoToAccount() {
@@ -70,8 +62,9 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         viewState.saveOrNotAuthData()
     }
 
-    fun signIn() {
-        viewState.goToAccountFromGoogle(mGoogleSignInClient, rcSignIn)
+    fun signIn(context: LoginActivity) {
+        initVariable(context)
+        context.startActivityForResult(mGoogleSignInClient.signInIntent, RC_SIGN_IN)
     }
 
     fun doSignUp(email: String, password: String, confirmPassword: String) {
@@ -113,7 +106,7 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
     }
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == rcSignIn) {
+        if (requestCode == RC_SIGN_IN) {
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
         }
@@ -123,11 +116,32 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            viewState.goToAccount()
+            if (account != null){
+                setGoogleAuthData(account)
+                viewState.goToAccount()
+            }
+
 
         } catch (e: ApiException) {
             Log.w("TAG", "signInResult:failed code=" + e.statusCode)
         }
+    }
+
+    private fun initVariable(context: LoginActivity) {
+        val googleSignInClient = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+        mGoogleSignInClient = GoogleSignIn.getClient(context, googleSignInClient)
+        mGoogleSignInClient.signOut()
+
+    }
+
+    private fun setGoogleAuthData(account: GoogleSignInAccount) {
+
+        keepAuthData.googleEmail = account.email
+        keepAuthData.googleName = account.displayName
+        keepAuthData.googleId = account.id
+        keepAuthData.googleImage= account.photoUrl.toString()
     }
 
     private fun updateSharedPreference(email: String, password: String) {
