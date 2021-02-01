@@ -11,13 +11,15 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
+import com.example.authorization.R
 import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.ui.base.BaseMvpActivity
-import com.example.authorization.R
 import com.example.authorization.ui.recoverpassword.RecoverPassword
 import com.example.authorization.utils.extensions.gone
 import com.example.authorization.utils.extensions.visible
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class LoginActivity : BaseMvpActivity(), LoginView {
 
@@ -26,15 +28,25 @@ class LoginActivity : BaseMvpActivity(), LoginView {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        loginPresenter.onActivityResult(requestCode, resultCode, data)
+    }
+
     override fun onCreateActivity(savedInstanceState: Bundle?) {
 
-        loginPresenter.onCreate()
+        loginPresenter.onCreate(this)
         showTextLogo()
         showImageLogo()
         initOnClickListeners()
     }
 
     private fun initOnClickListeners() {
+
+        vFlLogInGoogle.setOnClickListener() {
+            loginPresenter.signIn()
+        }
 
         vFlSignUp.setOnClickListener {
             loginPresenter.doSignUp(
@@ -59,11 +71,12 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vTvRecoverPass.setOnClickListener {
             loginPresenter.onRecoverPassClicked()
         }
-        vTvKeepLoggedIn.setOnClickListener{
+        vTvKeepLoggedIn.setOnClickListener {
             loginPresenter.onKeepLogInClicked()
         }
     }
 
+    //MARK: Assistant functions
     private fun showImageLogo() {
         Glide.with(this)
             .load(R.drawable.fox)
@@ -86,7 +99,11 @@ class LoginActivity : BaseMvpActivity(), LoginView {
     }
 
     // MARK: View Implementation
-    override fun saveOrNotAuthData(){
+    override fun goToAccountFromGoogle(mGoogleSignInClient: GoogleSignInClient,rcSignIn: Int ) {
+        startActivityForResult(mGoogleSignInClient.signInIntent, rcSignIn)
+    }
+
+    override fun saveOrNotAuthData() {
         vMcbKeepLoggedIn.changeIsKeepLogIn()
     }
 
@@ -105,12 +122,14 @@ class LoginActivity : BaseMvpActivity(), LoginView {
         vFlSignUp.gone()
         vFlLogIn.visible()
         vLlKeepLogIn.visible()
+        vFlLogInGoogle.visible()
     }
 
     override fun goToSignUpForm() {
         vTvLogIn.setTextColor(ContextCompat.getColor(this, R.color.white))
         vTvSignUp.setTextColor(ContextCompat.getColor(this, R.color.orange))
         vLlKeepLogIn.gone()
+        vFlLogInGoogle.gone()
         vFlLogIn.gone()
         vFlSignUp.visible()
         vLlRepeatPass.visible()

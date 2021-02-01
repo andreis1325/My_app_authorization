@@ -29,5 +29,6 @@
     <string name="search">Search..</string>
     <string name="exit">Press once again to exit!</string>
     <string name="go_to_site">Go to Site</string>
+    <string name="google">Google</string>
 
 </resources>
