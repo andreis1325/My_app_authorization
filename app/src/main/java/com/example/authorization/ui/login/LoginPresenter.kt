@@ -1,17 +1,33 @@
 package com.example.authorization.ui.login
 
+import android.content.SharedPreferences
 import com.arellomobile.mvp.InjectViewState
+import com.example.authorization.MyApp
 import com.example.authorization.R
-import com.example.authorization.repo.UserRepo
+import com.example.authorization.model.isLoggedIn
+import com.example.authorization.model.userEmail
+import com.example.authorization.model.userPassword
+import com.example.authorization.net.repo.UserRepo
 import com.example.authorization.ui.base.BaseMvpPresenter
 import com.example.authorization.utils.extensions.isEmailValid
+import org.kodein.di.instance
 
 @InjectViewState
 class LoginPresenter() : BaseMvpPresenter<LoginView>() {
 
-    private val userRepo = UserRepo()
+    private val userRepo by MyApp.kodein.instance<UserRepo>()
+    private val keepAuthData by MyApp.kodein.instance<SharedPreferences>()
 
-    fun doLogIn(email: String, password: String) {
+    fun onCreate() {
+        logInOrGoToAccount()
+    }
+
+    private fun logInOrGoToAccount() {
+        if (keepAuthData.isLoggedIn)
+            viewState.goToAccount()
+    }
+
+    fun doLogIn(email: String, password: String, isKeepData: Boolean) {
 
         if (email.isEmpty() || password.isEmpty()) {
             viewState.showMsg(R.string.empty_field)
@@ -23,39 +39,42 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
             return
         }
 
-        if(userRepo.isRegistered(email, password)){
+        if (userRepo.isRegistered(email)) {
+            if (isKeepData)
+                updateSharedPreference(email, password)
             viewState.goToAccount()
-            viewState.showMsg(R.string.successful)
         } else
             viewState.showMsg(R.string.wrong_data)
-
     }
 
-    fun doSignUp(email: String, pass1: String, pass2: String) {
+    fun onKeepLogInClicked(){
+        viewState.saveOrNotAuthData()
+    }
 
-        if (email.isEmpty() || pass1.isEmpty() || pass2.isEmpty()) {
+    fun doSignUp(email: String, password: String, confirmPassword: String) {
+
+        if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
             viewState.showMsg(R.string.empty_field)
             return
         }
 
-        if(!email.isEmailValid()) {
+        if (!email.isEmailValid()) {
             viewState.showMsg(R.string.wrong_email)
             return
         }
 
-        if (pass1 != pass2){
+        if (password != confirmPassword) {
             viewState.showMsg(R.string.not_equal_passwords)
             return
         }
 
-        if(userRepo.isRegistered(email, pass1)){
-            viewState.showMsg(R.string.wrong_email)
+        if (userRepo.isRegistered(email)) {
+            viewState.showMsg(R.string.wrong_data)
             return
         }
 
-            userRepo.addUser(email, pass1)
-            viewState.showMsg(R.string.successful)
-
+        userRepo.addUser(email, password)
+        viewState.goToAccount()
     }
 
     fun onSwitchedLogInClicked() {
@@ -66,19 +85,14 @@ class LoginPresenter() : BaseMvpPresenter<LoginView>() {
         viewState.goToSignUpForm()
     }
 
-    fun onKeepLogInClicked(){
-        viewState.keepLoggedIn()
-    }
-
-    fun onLogInClicked(){
-        viewState.doLogIn()
-    }
-
-    fun onSignUpClicked(){
-        viewState.createAccount()
-    }
-
-    fun onRecoverPassClicked(){
+    fun onRecoverPassClicked() {
         viewState.recoverPassword()
+    }
+
+    // MARK : Assistant methods
+    private fun updateSharedPreference(email: String, password: String) {
+        keepAuthData.userEmail = email
+        keepAuthData.userPassword = password
+        keepAuthData.isLoggedIn = true
     }
 }

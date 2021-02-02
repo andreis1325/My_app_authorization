@@ -1,4 +1,5 @@
 <resources>
+
     <string name="app_name">Authorization</string>
     <string name="logo">poifox</string>
     <string name="preamble">Find the best place in town</string>
@@ -16,6 +17,17 @@
     <string name="successful">Successful</string>
     <string name="wrong_data">Wrong email or password</string>
     <string name="not_equal_passwords">Passwords aren\'t equal</string>
-
+    <string name="log_out">Log out</string>
+    <string name="news">NEWS</string>
+    <string name="first_menu_item">article</string>
+    <string name="second_menu_item">blog</string>
+    <string name="third_menu_item">report</string>
+    <string name="history">history</string>
+    <string name="home">home</string>
+    <string name="bookmarks">bookmarks</string>
+    <string name="profile">profile</string>
+    <string name="search">Search..</string>
+    <string name="exit">Press once again to exit!</string>
+    <string name="go_to_site">Go to Site</string>
 
 </resources>
