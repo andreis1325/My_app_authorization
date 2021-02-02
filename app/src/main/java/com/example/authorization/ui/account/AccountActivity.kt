@@ -10,11 +10,12 @@ import com.example.authorization.ui.base.BaseMvpActivity
 import com.example.authorization.ui.fragments.bookmarks.BookmarksFragment
 import com.example.authorization.ui.fragments.extendednews.ExtendedNewsFragment
 import com.example.authorization.ui.fragments.history.HistoryFragment
-import com.example.authorization.ui.fragments.profile.ProfileFragment
 import com.example.authorization.ui.fragments.home.HomeFragment
+import com.example.authorization.ui.fragments.profile.ProfileFragment
 import com.ncapdevi.fragnav.FragNavController
 import com.ncapdevi.fragnav.FragNavTransactionOptions
 import kotlinx.android.synthetic.main.activity_account.*
+
 
 class AccountActivity : BaseMvpActivity(), AccountView {
 
@@ -22,7 +23,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     private var backPressed: Long = 0
     private var isClickBlocked = false
 
-    companion object{
+    companion object {
         private const val TIME: Int = 2000
     }
 
@@ -49,6 +50,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
     override fun onCreateActivity(savedInstanceState: Bundle?) {
         setupNavigation(savedInstanceState)
         setupNavigationListeners()
+
     }
 
     private fun setupNavigation(savedInstanceState: Bundle?) {
@@ -64,7 +66,7 @@ class AccountActivity : BaseMvpActivity(), AccountView {
 
     fun goToItemNews(fragment: ExtendedNewsFragment) {
 
-        if(!isClickBlocked)
+        if (!isClickBlocked)
             fragNavController.pushFragment(fragment)
         isClickBlocked = true
     }

@@ -100,4 +100,7 @@ dependencies {
 
     // refresh
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //google
+    implementation 'com.google.android.gms:play-services-auth:19.0.0'
 }

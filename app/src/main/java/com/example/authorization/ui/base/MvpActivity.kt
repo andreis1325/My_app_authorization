@@ -4,6 +4,8 @@ package com.example.authorization.ui.base
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import com.arellomobile.mvp.MvpDelegate
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+
 
 abstract class MvpActivity : FragmentActivity() {
     private var mMvpDelegate: MvpDelegate<out MvpActivity>? = null
@@ -27,7 +29,7 @@ abstract class MvpActivity : FragmentActivity() {
 
     override fun onStart() {
         super.onStart()
-
+        val account = GoogleSignIn.getLastSignedInAccount(this)
         mvpDelegate.onAttach()
     }
 

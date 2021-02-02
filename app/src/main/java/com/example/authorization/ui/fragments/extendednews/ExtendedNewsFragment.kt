@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.net.toUri
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.bumptech.glide.Glide
 import com.delivery.ui.base.BaseMvpFragment
@@ -11,6 +12,7 @@ import com.example.authorization.R
 import com.example.authorization.net.responses.ArticleResponse
 import com.example.authorization.ui.account.AccountActivity
 import com.example.authorization.utils.extensions.generateDate
+import com.example.authorization.utils.extensions.setImage
 import com.example.authorization.utils.extensions.visible
 import com.example.authorization.utils.transformations.MenuItem
 import kotlinx.android.synthetic.main.fragment_extendend_news.*
@@ -53,17 +55,15 @@ class ExtendedNewsFragment : BaseMvpFragment(), ExtendedNewsView {
         initOnClickListeners()
     }
 
-    //MARK: View implementation
-    override fun setNews(it: ArticleResponse) {
-        vSvExtendedNews.visible()
-        setImage(it.imageUrl)
-        setTitle(it.title)
-        setDate(it.publishedAt)
-        setSummary(it.summary)
-        setSite(it.url)
+    private fun initOnClickListeners() {
+        vIvBack.setOnClickListener {
+            (activity as? AccountActivity)?.onBackPressed()
+        }
+        vBGoToSite.setOnClickListener{
+            goToSite()
+        }
     }
 
-    //MARK: Assistant functions
     private fun setSite(site: String?) {
         if (site != null) {
             siteUrl = site
@@ -82,27 +82,20 @@ class ExtendedNewsFragment : BaseMvpFragment(), ExtendedNewsView {
         vTvExtendedNewsTitle.text = title
     }
 
-    private fun setImage(imageUrl: String?) {
-        Glide.with(this)
-            .load(imageUrl)
-            .centerCrop()
-            .error(R.drawable.fox)
-            .into(vIvExtendedNewsImage)
-    }
-
-    private fun initOnClickListeners() {
-        vIvBack.setOnClickListener {
-            (activity as? AccountActivity)?.onBackPressed()
-        }
-        vBGoToSite.setOnClickListener{
-            goToSite()
-        }
-    }
-
     private fun goToSite(){
         val openURL = Intent(Intent.ACTION_VIEW)
         openURL.data = Uri.parse(siteUrl)
         startActivity(openURL)
+    }
+
+    //MARK: View implementation
+    override fun setNews(it: ArticleResponse) {
+        vSvExtendedNews.visible()
+        vIvExtendedNewsImage.setImage(it.imageUrl)
+        setTitle(it.title)
+        setDate(it.publishedAt)
+        setSummary(it.summary)
+        setSite(it.url)
     }
 }
 

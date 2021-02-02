@@ -48,6 +48,7 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         val articleItems = articleRepo.getArticles()
         val blogItems = blogRepo.getBlogs()
         val reportItems = reportRepo.getReports()
+
         viewState.hideRefreshAnimation()
         addDisposable(
             Observable.zip(
@@ -105,13 +106,6 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         viewState.updateArticles(searchedItems)
     }
 
-    fun onRefreshNews() {
-        viewState.showRefreshAnimation()
-        loadDataAndUpdateUI()
-
-    }
-
-    // MARK: Assistant function
     private fun findSearchedItems(searchText: String): ArrayList<ArticleResponse> {
         val searchedNewsItems: ArrayList<ArticleResponse> = arrayListOf()
 
@@ -121,5 +115,11 @@ class HomePresenter : BaseMvpPresenter<HomeView>() {
         }
 
         return searchedNewsItems
+    }
+
+    fun onRefreshNews() {
+        viewState.showRefreshAnimation()
+        loadDataAndUpdateUI()
+
     }
 }
